@@ -10,14 +10,14 @@
     <meta name="theme-color" content="#161616" />
     <title>wFileManager — Simple file management for Linux servers</title>
 
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/KmerHosting/wfilemanager-website@main/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KmerHosting/wfilemanager-website@main/styles.css" />
 
     <script
       type="module"
@@ -73,11 +73,7 @@
 
             <div class="hero-actions">
               <bx-btn kind="primary" href="#install">Install wFileManager</bx-btn>
-              <bx-btn
-                kind="tertiary"
-                href="https://github.com/KmerHosting/wfilemanager"
-                target="_blank"
-              >
+              <bx-btn kind="tertiary" href="https://github.com/KmerHosting/wfilemanager" target="_blank">
                 View on GitHub
               </bx-btn>
             </div>
@@ -86,51 +82,20 @@
               <span>Open source</span>
               <span>MIT licensed</span>
               <span>Ubuntu 20.04+</span>
-              <span>v0.11.3</span>
+              <span>v0.11.4</span>
             </div>
           </div>
 
-          <div class="product-window" aria-label="wFileManager interface preview">
-            <div class="window-topbar">
-              <div class="window-brand">wFileManager</div>
-              <div class="window-actions">
-                <span class="window-icon">☼</span>
-                <span class="window-icon">◯</span>
-              </div>
-            </div>
-            <div class="window-body">
-              <aside class="mock-sidebar">
-                <div class="mock-label">FILES</div>
-                <div class="mock-nav-item active">▣ <span>Overview</span></div>
-                <div class="mock-nav-item">▧ <span>File Explorer</span></div>
-                <div class="mock-nav-item">♲ <span>Trash</span></div>
-                <div class="mock-separator"></div>
-                <div class="mock-label">SETTINGS</div>
-                <div class="mock-nav-item">◯ <span>Administrator</span></div>
-                <div class="mock-nav-item">ⓘ <span>About & updates</span></div>
-                <div class="mock-version">v0.11.3</div>
-              </aside>
-              <div class="mock-content">
-                <h2>Overview</h2>
-                <p>One administrator. One local database. Direct access to this server's files.</p>
-                <div class="mock-panels">
-                  <div class="mock-panel">
-                    <h3>Server</h3>
-                    <dl>
-                      <div><dt>Hostname</dt><dd>linux-server</dd></div>
-                      <div><dt>Operating system</dt><dd>Ubuntu 24.04 LTS</dd></div>
-                      <div><dt>Architecture</dt><dd>x64</dd></div>
-                      <div><dt>Server IPv4</dt><dd>203.0.113.10</dd></div>
-                    </dl>
-                  </div>
-                  <div class="mock-panel">
-                    <h3>Quick access</h3>
-                    <button class="mock-primary">Open File Explorer</button>
-                    <button class="mock-secondary">Trash (0)</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="product-window" aria-label="Real wFileManager File Explorer screenshot">
+            <img
+              src="https://cdn.jsdelivr.net/gh/KmerHosting/wfilemanager-website@main/assets/wfilemanager-file-explorer.svg"
+              alt="wFileManager File Explorer"
+              width="1000"
+              height="475"
+              fetchpriority="high"
+              decoding="async"
+              style="display:block;width:100%;height:auto"
+            />
           </div>
         </div>
       </section>
@@ -240,39 +205,19 @@
           </div>
 
           <div class="architecture-list">
-            <div>
-              <span class="arch-key">Account</span>
-              <strong>Single local administrator</strong>
-            </div>
-            <div>
-              <span class="arch-key">Database</span>
-              <strong>SQLite on the server</strong>
-            </div>
-            <div>
-              <span class="arch-key">Runtime</span>
-              <strong>Prebuilt Node.js application</strong>
-            </div>
-            <div>
-              <span class="arch-key">Service</span>
-              <strong>systemd</strong>
-            </div>
-            <div>
-              <span class="arch-key">Updates</span>
-              <strong>SHA-256 + atomic activation</strong>
-            </div>
-            <div>
-              <span class="arch-key">License</span>
-              <strong>MIT</strong>
-            </div>
+            <div><span class="arch-key">Account</span><strong>Single local administrator</strong></div>
+            <div><span class="arch-key">Database</span><strong>SQLite on the server</strong></div>
+            <div><span class="arch-key">Runtime</span><strong>Prebuilt Node.js application</strong></div>
+            <div><span class="arch-key">Service</span><strong>systemd</strong></div>
+            <div><span class="arch-key">Updates</span><strong>SHA-256 + atomic activation</strong></div>
+            <div><span class="arch-key">License</span><strong>MIT</strong></div>
           </div>
         </div>
       </section>
 
       <section class="section faq-section">
         <div class="container faq-grid">
-          <div class="section-heading compact">
-            <h2>Common questions.</h2>
-          </div>
+          <div class="section-heading compact"><h2>Common questions.</h2></div>
           <div class="faq-list">
             <details>
               <summary>Does wFileManager require a domain?</summary>
@@ -334,6 +279,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/KmerHosting/wfilemanager-website@main/script.js?v=0.11.4-real-shot"></script>
   </body>
 </html>

@@ -25,8 +25,28 @@ for (const nativeControl of ["<button", "<input", "<select", "<textarea", "<deta
   }
 }
 
+for (const required of [
+  '<GlobalTheme theme="white">',
+  '<SkipToContent href="#main-content"',
+  'aria-expanded={isSideNavExpanded}',
+  'aria-controls={MOBILE_NAV_ID}',
+  'onOverlayClick={onClickSideNavExpand}',
+]) {
+  if (!app.includes(required)) {
+    violations.push(`Canonical Carbon shell requirement is missing: ${required}`);
+  }
+}
+
 if (!styles.includes('@use "@carbon/react"') || !styles.includes('@carbon/styles/scss/spacing')) {
   violations.push("Styles must load Carbon and use Carbon spacing tokens.");
+}
+
+if (!styles.includes('@carbon/styles/scss/breakpoint') || !styles.includes('breakpoint.breakpoint-down(')) {
+  violations.push("Responsive rules must use Carbon breakpoint utilities.");
+}
+
+if (styles.includes('@media (')) {
+  violations.push("Use Carbon breakpoint utilities instead of hand-authored media thresholds.");
 }
 
 for (const forbidden of ["border-radius:", "box-shadow:", "linear-gradient(", "radial-gradient("]) {
@@ -40,4 +60,4 @@ if (violations.length) {
   process.exit(1);
 }
 
-console.log("Carbon conformance audit passed for the wFileManager website.");
+console.log("Carbon source-alignment audit passed for the wFileManager website.");

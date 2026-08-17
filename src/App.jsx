@@ -15,7 +15,6 @@ import {
   StructuredListRow,
   StructuredListWrapper,
   Tag,
-  Theme,
 } from "@carbon/react";
 import { Download, Launch, LogoGithub } from "@carbon/icons-react";
 import { InstallSection } from "./components/InstallSection.jsx";
@@ -30,8 +29,8 @@ import {
   PRODUCT_VERSION,
 } from "./content.js";
 
-const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer.png";
-const UPDATES_SCREENSHOT = "/wfilemanager-about-updates.png";
+const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer-full.png";
+const UPDATES_SCREENSHOT = "/wfilemanager-about-updates-full.png";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
 
 function getInitialTheme() {
@@ -133,42 +132,38 @@ function Capabilities() {
   );
 }
 
-function ProductSection({ theme }) {
-  const sectionTheme = theme === "g100" ? "g90" : "g10";
-
+function ProductSection() {
   return (
-    <Theme theme={sectionTheme}>
-      <section id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
-        <Grid fullWidth>
-          <Column sm={4} md={8} lg={10}>
-            <ProductShot
-              src={UPDATES_SCREENSHOT}
-              alt="wFileManager About and updates screen showing release status"
-              caption="Updates remain visible, verified and recoverable."
-            />
-          </Column>
-          <Column sm={4} md={8} lg={6}>
-            <div className="wfm-section-intro wfm-product__copy">
-              <p className="wfm-section-label">Local by design</p>
-              <h2 id="product-title">Your files stay on the server. So does the application data.</h2>
-              <p>
-                There is no hosted account backend and no extra object-storage layer between the interface and the
-                files you are managing. Application state lives in local SQLite.
-              </p>
-              <div className="wfm-product__links">
-                <Button
-                  href={`https://github.com/KmerHosting/wfilemanager/releases/tag/v${PRODUCT_VERSION}`}
-                  kind="ghost"
-                  renderIcon={Launch}
-                >
-                  Release {PRODUCT_VERSION}
-                </Button>
-              </div>
+    <section id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
+      <Grid fullWidth>
+        <Column sm={4} md={8} lg={10}>
+          <ProductShot
+            src={UPDATES_SCREENSHOT}
+            alt="wFileManager About and updates screen showing release status"
+            caption="Updates remain visible, verified and recoverable."
+          />
+        </Column>
+        <Column sm={4} md={8} lg={6}>
+          <div className="wfm-section-intro wfm-product__copy">
+            <p className="wfm-section-label">Local by design</p>
+            <h2 id="product-title">Your files stay on the server. So does the application data.</h2>
+            <p>
+              There is no hosted account backend and no extra object-storage layer between the interface and the
+              files you are managing. Application state lives in local SQLite.
+            </p>
+            <div className="wfm-product__links">
+              <Button
+                href={`https://github.com/KmerHosting/wfilemanager/releases/tag/v${PRODUCT_VERSION}`}
+                kind="ghost"
+                renderIcon={Launch}
+              >
+                Release {PRODUCT_VERSION}
+              </Button>
             </div>
-          </Column>
-        </Grid>
-      </section>
-    </Theme>
+          </div>
+        </Column>
+      </Grid>
+    </section>
   );
 }
 
@@ -233,28 +228,24 @@ function Faq() {
   );
 }
 
-function FinalCta({ theme }) {
-  const inverseTheme = theme === "g100" ? "white" : "g100";
-
+function FinalCta() {
   return (
-    <Theme theme={inverseTheme}>
-      <section className="wfm-final-cta" aria-labelledby="cta-title">
-        <Grid fullWidth>
-          <Column sm={4} md={8} lg={9}>
-            <h2 id="cta-title">Put a focused file manager on your Linux server.</h2>
-            <p>No hosted account. No remote storage layer. No server-side application compilation.</p>
-          </Column>
-          <Column sm={4} md={8} lg={{ span: 6, offset: 10 }}>
-            <div className="wfm-actions wfm-actions--end">
-              <Button href="#install">Install now</Button>
-              <Button href="https://kmerhosting.com/docs" kind="tertiary" renderIcon={Launch}>
-                Documentation
-              </Button>
-            </div>
-          </Column>
-        </Grid>
-      </section>
-    </Theme>
+    <section className="wfm-final-cta" aria-labelledby="cta-title">
+      <Grid fullWidth>
+        <Column sm={4} md={8} lg={9}>
+          <h2 id="cta-title">Put a focused file manager on your Linux server.</h2>
+          <p>No hosted account. No remote storage layer. No server-side application compilation.</p>
+        </Column>
+        <Column sm={4} md={8} lg={{ span: 6, offset: 10 }}>
+          <div className="wfm-actions wfm-actions--end">
+            <Button href="#install">Install now</Button>
+            <Button href="https://kmerhosting.com/docs" kind="tertiary" renderIcon={Launch}>
+              Documentation
+            </Button>
+          </div>
+        </Column>
+      </Grid>
+    </section>
   );
 }
 
@@ -276,11 +267,11 @@ export default function App() {
         <Hero />
         <ProductFacts />
         <Capabilities />
-        <ProductSection theme={theme} />
+        <ProductSection />
         <InstallSection />
         <Architecture />
         <Faq />
-        <FinalCta theme={theme} />
+        <FinalCta />
         <SiteFooter />
       </Content>
     </GlobalTheme>

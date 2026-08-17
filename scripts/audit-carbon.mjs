@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { access, readdir, readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 
@@ -10,6 +11,11 @@ async function collectFiles(directory) {
     else files.push(path);
   }
   return files;
+}
+
+function gitBlobSha(bytes) {
+  const header = Buffer.from(`blob ${bytes.length}\0`);
+  return createHash("sha1").update(header).update(bytes).digest("hex");
 }
 
 const srcFiles = (await collectFiles("src")).filter((file) => [".jsx", ".js", ".scss"].includes(extname(file)));
@@ -53,13 +59,16 @@ for (const required of [
   "aria-expanded={isSideNavExpanded}",
   "aria-controls={MOBILE_NAV_ID}",
   "onOverlayClick={onClickSideNavExpand}",
-  "<Theme theme={inverseTheme}>",
   "<Grid fullWidth",
   "<CodeSnippet",
   "<StructuredListWrapper",
   "<Accordion",
 ]) {
   if (!joinedSource.includes(required)) violations.push(`Canonical Carbon requirement is missing: ${required}`);
+}
+
+if (joinedSource.includes("<Theme ") || joinedSource.includes("<Theme>")) {
+  violations.push("Nested Carbon Theme wrappers are not allowed: GlobalTheme must control the whole website.");
 }
 
 for (const requiredUse of [
@@ -92,31 +101,34 @@ for (const query of mediaQueries) {
 
 const productImages = [
   {
-    sourceRef: '"/wfilemanager-file-explorer.png"',
-    file: "public/wfilemanager-file-explorer.png",
+    sourceRef: '"/wfilemanager-file-explorer-full.png"',
+    file: "public/wfilemanager-file-explorer-full.png",
+    gitSha: "40314193a3b0b28cd2a3b37d3eef89a9d6e96ed3",
   },
   {
-    sourceRef: '"/wfilemanager-about-updates.png"',
-    file: "public/wfilemanager-about-updates.png",
+    sourceRef: '"/wfilemanager-about-updates-full.png"',
+    file: "public/wfilemanager-about-updates-full.png",
+    gitSha: "86ae1fd460c43fa09a5815c0213d485e071bafee",
   },
 ];
 
 for (const image of productImages) {
   if (!joinedSource.includes(image.sourceRef)) {
-    violations.push(`Product imagery must reference the current public asset ${image.sourceRef}.`);
+    violations.push(`Product imagery must reference ${image.sourceRef}.`);
   }
 
   try {
     await access(image.file);
+    const bytes = await readFile(image.file);
+    if (gitBlobSha(bytes) !== image.gitSha) {
+      violations.push(`Product screenshot does not match the approved full PNG: ${image.file}.`);
+    }
   } catch {
     violations.push(`Missing product screenshot asset: ${image.file}.`);
   }
 }
 
-const canonicalProductImages = new Set([
-  "public/wfilemanager-file-explorer.png",
-  "public/wfilemanager-about-updates.png",
-]);
+const canonicalProductImages = new Set(productImages.map(({ file }) => file));
 
 for (const directory of ["assets", "public"]) {
   try {

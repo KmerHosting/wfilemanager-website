@@ -10,14 +10,14 @@
     "audit:carbon": "node scripts/audit-carbon.mjs"
   },
   "dependencies": {
-    "@carbon/icons-react": "^11.86.0",
-    "@carbon/react": "^1.114.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "@carbon/icons-react": "11.86.0",
+    "@carbon/react": "1.114.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.2.0",
-    "sass": "^1.102.0",
-    "vite": "^8.1.5"
+    "@vitejs/plugin-react": "5.2.0",
+    "sass": "1.102.0",
+    "vite": "8.1.5"
   }
 }

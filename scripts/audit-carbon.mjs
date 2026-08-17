@@ -44,14 +44,16 @@ for (const [file, source] of Object.entries(sources)) {
 }
 
 for (const required of [
-  '<GlobalTheme theme="white">',
+  "<GlobalTheme theme={theme}>",
   '<SkipToContent href="#main-content"',
   "<HeaderContainer",
   "<HeaderMenuButton",
+  "<HeaderGlobalBar>",
+  "<HeaderGlobalAction",
   "aria-expanded={isSideNavExpanded}",
   "aria-controls={MOBILE_NAV_ID}",
   "onOverlayClick={onClickSideNavExpand}",
-  '<Theme theme="g100">',
+  "<Theme theme={inverseTheme}>",
   "<Grid fullWidth",
   "<CodeSnippet",
   "<StructuredListWrapper",
@@ -90,24 +92,47 @@ for (const query of mediaQueries) {
 
 const productImages = [
   {
-    sourceRef: '"/wfilemanager-file-explorer.svg"',
-    file: "public/wfilemanager-file-explorer.svg",
+    sourceRef: '"/wfilemanager-file-explorer.png"',
+    file: "public/wfilemanager-file-explorer.png",
   },
   {
-    sourceRef: '"/wfilemanager-about-updates.svg"',
-    file: "public/wfilemanager-about-updates.svg",
+    sourceRef: '"/wfilemanager-about-updates.png"',
+    file: "public/wfilemanager-about-updates.png",
   },
 ];
 
 for (const image of productImages) {
   if (!joinedSource.includes(image.sourceRef)) {
-    violations.push(`Product imagery must reference the stable public asset ${image.sourceRef}.`);
+    violations.push(`Product imagery must reference the current public asset ${image.sourceRef}.`);
   }
 
   try {
     await access(image.file);
   } catch {
     violations.push(`Missing product screenshot asset: ${image.file}.`);
+  }
+}
+
+const canonicalProductImages = new Set([
+  "public/wfilemanager-file-explorer.png",
+  "public/wfilemanager-about-updates.png",
+]);
+
+for (const directory of ["assets", "public"]) {
+  try {
+    for (const file of await collectFiles(directory)) {
+      const normalized = file.replaceAll("\\", "/");
+      if (normalized.endsWith("favicon.svg")) continue;
+      if (
+        normalized.includes("wfilemanager-") &&
+        /\.(png|jpe?g|svg|b64|webp)$/i.test(normalized) &&
+        !canonicalProductImages.has(normalized)
+      ) {
+        violations.push(`Stale product image must be removed: ${normalized}.`);
+      }
+    }
+  } catch {
+    // Optional directories may not exist.
   }
 }
 

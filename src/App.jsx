@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -29,8 +30,16 @@ import {
   PRODUCT_VERSION,
 } from "./content.js";
 
-const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer.svg";
-const UPDATES_SCREENSHOT = "/wfilemanager-about-updates.svg";
+const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer.png";
+const UPDATES_SCREENSHOT = "/wfilemanager-about-updates.png";
+const THEME_STORAGE_KEY = "wfilemanager-website-theme";
+
+function getInitialTheme() {
+  if (typeof window === "undefined") return "white";
+  const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (saved === "white" || saved === "g100") return saved;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "g100" : "white";
+}
 
 function Hero() {
   return (
@@ -124,9 +133,11 @@ function Capabilities() {
   );
 }
 
-function ProductSection() {
+function ProductSection({ theme }) {
+  const sectionTheme = theme === "g100" ? "g90" : "g10";
+
   return (
-    <Theme theme="g10">
+    <Theme theme={sectionTheme}>
       <section id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
         <Grid fullWidth>
           <Column sm={4} md={8} lg={10}>
@@ -222,9 +233,11 @@ function Faq() {
   );
 }
 
-function FinalCta() {
+function FinalCta({ theme }) {
+  const inverseTheme = theme === "g100" ? "white" : "g100";
+
   return (
-    <Theme theme="g100">
+    <Theme theme={inverseTheme}>
       <section className="wfm-final-cta" aria-labelledby="cta-title">
         <Grid fullWidth>
           <Column sm={4} md={8} lg={9}>
@@ -246,19 +259,28 @@ function FinalCta() {
 }
 
 export default function App() {
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-carbon-theme", theme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((current) => (current === "g100" ? "white" : "g100"));
+
   return (
-    <GlobalTheme theme="white">
+    <GlobalTheme theme={theme}>
       <SkipToContent href="#main-content" />
-      <SiteHeader />
+      <SiteHeader theme={theme} onToggleTheme={toggleTheme} />
       <Content id="main-content" className="wfm-site-content">
         <Hero />
         <ProductFacts />
         <Capabilities />
-        <ProductSection />
+        <ProductSection theme={theme} />
         <InstallSection />
         <Architecture />
         <Faq />
-        <FinalCta />
+        <FinalCta theme={theme} />
         <SiteFooter />
       </Content>
     </GlobalTheme>

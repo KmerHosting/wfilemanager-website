@@ -1,6 +1,9 @@
+import { Light, Moon } from "@carbon/icons-react";
 import {
   Header,
   HeaderContainer,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
   HeaderMenuButton,
   HeaderMenuItem,
   HeaderName,
@@ -19,7 +22,11 @@ const primaryItems = [
   ["Architecture", "#architecture"],
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ theme, onToggleTheme }) {
+  const isDark = theme === "g100";
+  const ThemeIcon = isDark ? Light : Moon;
+  const targetTheme = isDark ? "light" : "dark";
+
   return (
     <HeaderContainer
       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -44,6 +51,15 @@ export function SiteHeader() {
               <HeaderMenuItem href="https://kmerhosting.com/docs">Docs</HeaderMenuItem>
               <HeaderMenuItem href="https://github.com/KmerHosting/wfilemanager">GitHub</HeaderMenuItem>
             </HeaderNavigation>
+            <HeaderGlobalBar>
+              <HeaderGlobalAction
+                aria-label={`Switch to ${targetTheme} theme`}
+                tooltipAlignment="end"
+                onClick={onToggleTheme}
+              >
+                <ThemeIcon size={20} />
+              </HeaderGlobalAction>
+            </HeaderGlobalBar>
           </Header>
 
           <SideNav

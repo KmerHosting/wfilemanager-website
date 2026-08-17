@@ -12,9 +12,9 @@ The design contract is deliberately strict:
 - Colors are bound to `--cds-*` semantic tokens instead of copied color values.
 - Responsive behavior uses Carbon breakpoint Sass utilities.
 - Motion uses Carbon motion durations/easing and respects reduced-motion preferences.
-- The website uses the official White, G10 and G100 theme contexts rather than custom theme palettes.
-- Product screenshots are real wFileManager UI captures.
-- A repository audit rejects parallel UI systems, raw colors, custom gradients/shadows/radii, native controls and hand-written responsive media queries.
+- The global theme toggles between Carbon White and G100, with scoped Carbon theme zones for contrast.
+- Product imagery is limited to the two current wFileManager captures: File Explorer and About & updates.
+- A repository audit rejects parallel UI systems, raw colors, custom gradients/shadows/radii, native controls, hand-written responsive media queries and stale screenshot formats.
 
 ## Development
 

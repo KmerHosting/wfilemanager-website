@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 
 async function collectFiles(directory) {
@@ -88,8 +88,27 @@ for (const query of mediaQueries) {
   }
 }
 
-if (!joinedSource.includes("wfilemanager-file-explorer.webp") || !joinedSource.includes("wfilemanager-about-updates.webp")) {
-  violations.push("Product imagery must use the optimized wFileManager screenshots.");
+const productImages = [
+  {
+    sourceRef: '"/wfilemanager-file-explorer.png"',
+    file: "public/wfilemanager-file-explorer.png",
+  },
+  {
+    sourceRef: '"/wfilemanager-about-updates.png"',
+    file: "public/wfilemanager-about-updates.png",
+  },
+];
+
+for (const image of productImages) {
+  if (!joinedSource.includes(image.sourceRef)) {
+    violations.push(`Product imagery must reference the stable public asset ${image.sourceRef}.`);
+  }
+
+  try {
+    await access(image.file);
+  } catch {
+    violations.push(`Missing product screenshot asset: ${image.file}.`);
+  }
 }
 
 if (violations.length) {

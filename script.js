@@ -17,6 +17,32 @@ if (menuButton && mobileNav) {
   });
 }
 
+// Use a real application capture in the hero instead of a handcrafted mockup.
+const productWindow = document.querySelector('.product-window');
+if (productWindow) {
+  productWindow.setAttribute('aria-label', 'Real wFileManager File Explorer screenshot');
+  productWindow.replaceChildren();
+  productWindow.style.minHeight = '0';
+  productWindow.style.aspectRatio = '1000 / 475';
+  productWindow.style.background = '#f4f4f4';
+  productWindow.style.borderColor = '#c6c6c6';
+
+  const screenshot = document.createElement('img');
+  screenshot.src = 'assets/wfilemanager-file-explorer.svg';
+  screenshot.alt = 'wFileManager File Explorer';
+  screenshot.loading = 'eager';
+  screenshot.decoding = 'async';
+  screenshot.fetchPriority = 'high';
+  screenshot.style.width = '100%';
+  screenshot.style.height = '100%';
+  screenshot.style.objectFit = 'cover';
+  screenshot.style.display = 'block';
+  productWindow.appendChild(screenshot);
+}
+
+const heroVersion = document.querySelector('.hero-meta span:last-child');
+if (heroVersion) heroVersion.textContent = 'v0.11.4';
+
 const copyButton = document.querySelector('[data-copy-target]');
 const copyStatus = document.querySelector('#copy-status');
 

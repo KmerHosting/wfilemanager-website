@@ -5,6 +5,7 @@ import {
   CodeSnippet,
   Column,
   Content,
+  GlobalTheme,
   Grid,
   Header,
   HeaderContainer,
@@ -16,6 +17,7 @@ import {
   SideNav,
   SideNavItems,
   SideNavLink,
+  SkipToContent,
   Tag,
   Theme,
   Tile,
@@ -43,6 +45,8 @@ const principles = [
   ["Atomic updates", "Verified releases with health checks and rollback."],
 ];
 
+const MOBILE_NAV_ID = "wfm-mobile-navigation";
+
 function Navigation() {
   return (
     <HeaderContainer
@@ -51,6 +55,8 @@ function Navigation() {
           <Header aria-label="wFileManager website">
             <HeaderMenuButton
               aria-label={isSideNavExpanded ? "Close navigation" : "Open navigation"}
+              aria-expanded={isSideNavExpanded}
+              aria-controls={MOBILE_NAV_ID}
               isActive={isSideNavExpanded}
               onClick={onClickSideNavExpand}
             />
@@ -65,9 +71,11 @@ function Navigation() {
             </HeaderNavigation>
           </Header>
           <SideNav
+            id={MOBILE_NAV_ID}
             aria-label="Mobile navigation"
             expanded={isSideNavExpanded}
             isPersistent={false}
+            onOverlayClick={onClickSideNavExpand}
             onSideNavBlur={onClickSideNavExpand}
           >
             <SideNavItems>
@@ -89,7 +97,8 @@ function Navigation() {
 
 function App() {
   return (
-    <Theme theme="white">
+    <GlobalTheme theme="white">
+      <SkipToContent href="#main-content" />
       <Navigation />
       <Content id="main-content" className="wfm-site-content">
         <section id="top" className="wfm-hero" aria-labelledby="hero-title">
@@ -318,7 +327,7 @@ function App() {
           </Grid>
         </footer>
       </Content>
-    </Theme>
+    </GlobalTheme>
   );
 }
 

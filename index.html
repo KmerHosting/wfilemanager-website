@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="wFileManager is a lightweight web file manager for Linux servers with one local administrator, SQLite storage and simple atomic updates."
+    />
+    <meta name="theme-color" content="#161616" />
+    <title>wFileManager — Simple file management for Linux servers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/button.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/code-snippet.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/tag.min.js"
+    ></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="wFileManager home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="img">
+              <path d="M4 6h9l2.4 3H28v17H4z" fill="none" stroke="currentColor" stroke-width="2" />
+              <path d="M8 14h16M8 19h12" fill="none" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </span>
+          <span>wFileManager</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a href="#features">Features</a>
+          <a href="#install">Install</a>
+          <a href="https://kmerhosting.com/docs" target="_blank" rel="noreferrer">Docs</a>
+          <a href="https://github.com/KmerHosting/wfilemanager" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
+
+        <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="https://kmerhosting.com/docs" target="_blank" rel="noreferrer">Docs</a>
+        <a href="https://github.com/KmerHosting/wfilemanager" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1>File management for Linux servers, without the complexity.</h1>
+            <p class="hero-lead">
+              wFileManager gives you a fast web interface to browse, edit, upload and manage files on your Linux server. One administrator. One local SQLite database. No hosted backend.
+            </p>
+
+            <div class="hero-actions">
+              <bx-btn kind="primary" href="#install">Install wFileManager</bx-btn>
+              <bx-btn
+                kind="tertiary"
+                href="https://github.com/KmerHosting/wfilemanager"
+                target="_blank"
+              >
+                View on GitHub
+              </bx-btn>
+            </div>
+
+            <div class="hero-meta" aria-label="Product information">
+              <span>Open source</span>
+              <span>MIT licensed</span>
+              <span>Ubuntu 20.04+</span>
+              <span>v0.11.3</span>
+            </div>
+          </div>
+
+          <div class="product-window" aria-label="wFileManager interface preview">
+            <div class="window-topbar">
+              <div class="window-brand">wFileManager</div>
+              <div class="window-actions">
+                <span class="window-icon">☼</span>
+                <span class="window-icon">◯</span>
+              </div>
+            </div>
+            <div class="window-body">
+              <aside class="mock-sidebar">
+                <div class="mock-label">FILES</div>
+                <div class="mock-nav-item active">▣ <span>Overview</span></div>
+                <div class="mock-nav-item">▧ <span>File Explorer</span></div>
+                <div class="mock-nav-item">♲ <span>Trash</span></div>
+                <div class="mock-separator"></div>
+                <div class="mock-label">SETTINGS</div>
+                <div class="mock-nav-item">◯ <span>Administrator</span></div>
+                <div class="mock-nav-item">ⓘ <span>About & updates</span></div>
+                <div class="mock-version">v0.11.3</div>
+              </aside>
+              <div class="mock-content">
+                <h2>Overview</h2>
+                <p>One administrator. One local database. Direct access to this server's files.</p>
+                <div class="mock-panels">
+                  <div class="mock-panel">
+                    <h3>Server</h3>
+                    <dl>
+                      <div><dt>Hostname</dt><dd>linux-server</dd></div>
+                      <div><dt>Operating system</dt><dd>Ubuntu 24.04 LTS</dd></div>
+                      <div><dt>Architecture</dt><dd>x64</dd></div>
+                      <div><dt>Server IPv4</dt><dd>203.0.113.10</dd></div>
+                    </dl>
+                  </div>
+                  <div class="mock-panel">
+                    <h3>Quick access</h3>
+                    <button class="mock-primary">Open File Explorer</button>
+                    <button class="mock-secondary">Trash (0)</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="wFileManager principles">
+        <div class="container proof-grid">
+          <div><strong>Local-first</strong><span>Your data stays on your server.</span></div>
+          <div><strong>Single admin</strong><span>No user or role system to maintain.</span></div>
+          <div><strong>Fast install</strong><span>Prebuilt runtime. No app compilation.</span></div>
+          <div><strong>Atomic updates</strong><span>Verified releases with rollback.</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Everything needed for day-to-day file management.</h2>
+            <p>Focused on the operations you actually need on a Linux server.</p>
+          </div>
+
+          <div class="feature-layout">
+            <article class="feature feature-wide">
+              <div class="feature-number">01</div>
+              <div>
+                <h3>Browse the real filesystem</h3>
+                <p>Navigate directories directly on the server, search the current folder and manage files without a separate storage layer.</p>
+              </div>
+            </article>
+            <article class="feature">
+              <div class="feature-number">02</div>
+              <div>
+                <h3>Upload and download</h3>
+                <p>Transfer files with clear progress feedback for operations that may take time.</p>
+              </div>
+            </article>
+            <article class="feature">
+              <div class="feature-number">03</div>
+              <div>
+                <h3>Edit text files</h3>
+                <p>Open and save common text files directly from the browser.</p>
+              </div>
+            </article>
+            <article class="feature">
+              <div class="feature-number">04</div>
+              <div>
+                <h3>Copy and move</h3>
+                <p>Move large files and directories through background jobs with live status.</p>
+              </div>
+            </article>
+            <article class="feature">
+              <div class="feature-number">05</div>
+              <div>
+                <h3>Trash and restore</h3>
+                <p>Move files to a local trash before permanent deletion, then restore when needed.</p>
+              </div>
+            </article>
+            <article class="feature feature-wide">
+              <div class="feature-number">06</div>
+              <div>
+                <h3>Update safely</h3>
+                <p>Install verified prebuilt releases through an atomic switch. Health checks validate the new version and rollback remains available.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark" id="install">
+        <div class="container install-grid">
+          <div class="install-copy">
+            <h2>One command. That's the installation.</h2>
+            <p>
+              The installer verifies Ubuntu, installs the runtime requirements, downloads the prebuilt release, creates the systemd service and performs a health check.
+            </p>
+            <ul class="install-list">
+              <li><span>01</span> Run the command as root or with sudo.</li>
+              <li><span>02</span> Open the displayed server URL.</li>
+              <li><span>03</span> Enter the first-run setup code.</li>
+              <li><span>04</span> Choose the administrator password.</li>
+            </ul>
+          </div>
+
+          <div class="install-terminal">
+            <div class="terminal-header">
+              <span>Install wFileManager</span>
+              <bx-tag type="green">Ubuntu</bx-tag>
+            </div>
+            <div class="terminal-body">
+              <span class="prompt">$</span>
+              <code id="install-command">curl -fsSL https://igihzeyfgwhnuiflamvn.supabase.co/storage/v1/object/public/releases.kmerhosting.com/wfilemanager/install.sh | sudo bash</code>
+            </div>
+            <div class="terminal-footer">
+              <button class="copy-button" type="button" data-copy-target="install-command">Copy command</button>
+              <span id="copy-status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section architecture-section">
+        <div class="container architecture-grid">
+          <div>
+            <h2>Simple by design.</h2>
+            <p>
+              wFileManager intentionally avoids the infrastructure normally attached to control panels. There is no hosted database, no multi-tenant account service and no application build on the target server.
+            </p>
+          </div>
+
+          <div class="architecture-list">
+            <div>
+              <span class="arch-key">Account</span>
+              <strong>Single local administrator</strong>
+            </div>
+            <div>
+              <span class="arch-key">Database</span>
+              <strong>SQLite on the server</strong>
+            </div>
+            <div>
+              <span class="arch-key">Runtime</span>
+              <strong>Prebuilt Node.js application</strong>
+            </div>
+            <div>
+              <span class="arch-key">Service</span>
+              <strong>systemd</strong>
+            </div>
+            <div>
+              <span class="arch-key">Updates</span>
+              <strong>SHA-256 + atomic activation</strong>
+            </div>
+            <div>
+              <span class="arch-key">License</span>
+              <strong>MIT</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq-section">
+        <div class="container faq-grid">
+          <div class="section-heading compact">
+            <h2>Common questions.</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>Does wFileManager require a domain?</summary>
+              <p>No. It can run directly on the server IP and port 1973. A domain and HTTPS reverse proxy are optional.</p>
+            </details>
+            <details>
+              <summary>Where is application data stored?</summary>
+              <p>Application data is stored locally in SQLite. Files remain in their normal locations on the Linux filesystem.</p>
+            </details>
+            <details>
+              <summary>Does it support multiple users?</summary>
+              <p>No. wFileManager intentionally uses one local administrator account to keep the product and installation simple.</p>
+            </details>
+            <details>
+              <summary>How do I reset the administrator password?</summary>
+              <p>From the server terminal, run <code>sudo wfilemanager-reset-admin-password</code>.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="container cta-inner">
+          <div>
+            <h2>Manage your server files from the browser.</h2>
+            <p>Open source, local-first and intentionally small.</p>
+          </div>
+          <div class="cta-actions">
+            <bx-btn kind="primary" href="#install">Install now</bx-btn>
+            <bx-btn kind="tertiary" href="https://kmerhosting.com/docs" target="_blank">Documentation</bx-btn>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href="#top">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M4 6h9l2.4 3H28v17H4z" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M8 14h16M8 19h12" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </span>
+            <span>wFileManager</span>
+          </a>
+          <p>A lightweight web file manager for Linux servers.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/KmerHosting/wfilemanager" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://kmerhosting.com/docs" target="_blank" rel="noreferrer">Documentation</a>
+          <a href="https://kmerhosting.com" target="_blank" rel="noreferrer">KmerHosting</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> KmerHosting LLC.</span>
+        <span>MIT licensed.</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

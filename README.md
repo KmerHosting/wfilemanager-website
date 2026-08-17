@@ -1,23 +1,32 @@
 # wFileManager Website
 
-Static website for [wFileManager](https://github.com/KmerHosting/wfilemanager), a lightweight web file manager for Linux servers.
+Official website for [wFileManager](https://github.com/KmerHosting/wfilemanager), a lightweight local-first web file manager for Linux servers.
 
-## Stack
+## Frontend
 
-- HTML
-- CSS
-- Vanilla JavaScript
-- [Carbon Web Components](https://github.com/carbon-design-system/carbon-web-components) via CDN
+The website is a React/Vite application built directly on IBM Carbon Design System:
 
-No build step is required.
+- `@carbon/react`
+- `@carbon/icons-react`
+- Carbon UI Shell
+- Carbon Grid, Tile, Tag, Accordion, CodeSnippet, Link and Button components
+- Carbon semantic tokens, typography and spacing
 
-## Run locally
+A repository audit rejects parallel UI systems and non-Carbon visual treatments in the application surface.
+
+## Development
 
 ```bash
-python3 -m http.server 8080
+npm install
+npm run dev
 ```
 
-Then open `http://localhost:8080`.
+Production validation:
+
+```bash
+npm run audit:carbon
+npm run build
+```
 
 ## Product links
 

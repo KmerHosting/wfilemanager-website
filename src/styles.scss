@@ -1,0 +1,344 @@
+@use "@carbon/react";
+@use "@carbon/styles/scss/spacing" as spacing;
+@use "@carbon/styles/scss/type" as type;
+
+html {
+  scroll-behavior: smooth;
+  background: var(--cds-background);
+}
+
+body {
+  margin: 0;
+  background: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+code {
+  font-family: "IBM Plex Mono", "Menlo", monospace;
+}
+
+.wfm-site-content {
+  padding: 3rem 0 0;
+  background: var(--cds-background);
+}
+
+.wfm-hero,
+.wfm-section,
+.wfm-showcase,
+.wfm-cta,
+.wfm-footer {
+  scroll-margin-top: 3rem;
+}
+
+.wfm-hero {
+  padding-block: spacing.$spacing-11 spacing.$spacing-12;
+}
+
+.wfm-hero__copy {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: spacing.$spacing-06;
+}
+
+.wfm-hero h1 {
+  @include type.type-style("heading-07");
+  max-width: 12ch;
+  margin: 0;
+}
+
+.wfm-hero__lead,
+.wfm-section-heading > p:last-child,
+.wfm-showcase .wfm-section-heading > p:last-child,
+.wfm-cta p {
+  @include type.type-style("body-02");
+  max-width: 42rem;
+  margin: 0;
+  color: var(--cds-text-secondary);
+}
+
+.wfm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing.$spacing-03;
+}
+
+.wfm-actions--end {
+  justify-content: flex-end;
+}
+
+.wfm-meta {
+  @include type.type-style("label-01");
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing.$spacing-05;
+  color: var(--cds-text-secondary);
+}
+
+.wfm-product-shot {
+  overflow: hidden;
+  border: 1px solid var(--cds-border-subtle);
+  background: var(--cds-layer-01);
+}
+
+.wfm-product-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wfm-product-shot--flat {
+  border-color: var(--cds-border-subtle-01);
+}
+
+.wfm-proof {
+  border-block: 1px solid var(--cds-border-subtle);
+  background: var(--cds-layer-01);
+}
+
+.wfm-proof-tile,
+.wfm-feature-tile,
+.wfm-command-tile,
+.wfm-definition-tile {
+  min-height: 100%;
+  border: 0;
+}
+
+.wfm-proof-tile {
+  min-height: 10rem;
+  padding: spacing.$spacing-06;
+  background: var(--cds-layer-01);
+}
+
+.wfm-proof-tile h2,
+.wfm-feature-tile h3,
+.wfm-command-tile h3,
+.wfm-footer h2 {
+  @include type.type-style("heading-03");
+  margin: 0;
+}
+
+.wfm-proof-tile p,
+.wfm-feature-tile p,
+.wfm-command-tile p,
+.wfm-footer p {
+  @include type.type-style("body-01");
+  margin: spacing.$spacing-04 0 0;
+  color: var(--cds-text-secondary);
+}
+
+.wfm-section,
+.wfm-showcase,
+.wfm-cta {
+  padding-block: spacing.$spacing-12;
+}
+
+.wfm-section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$spacing-05;
+}
+
+.wfm-section-heading h2,
+.wfm-cta h2 {
+  @include type.type-style("heading-06");
+  max-width: 15ch;
+  margin: 0;
+}
+
+.wfm-eyebrow,
+.wfm-feature-number {
+  @include type.type-style("label-01");
+  margin: 0;
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.wfm-feature-grid {
+  margin-top: spacing.$spacing-09;
+}
+
+.wfm-feature-tile {
+  min-height: 16rem;
+  padding: spacing.$spacing-06;
+  background: var(--cds-layer-01);
+}
+
+.wfm-feature-tile h3 {
+  margin-top: spacing.$spacing-07;
+}
+
+.wfm-feature-tile p {
+  max-width: 32rem;
+}
+
+.wfm-install {
+  background: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+.wfm-install .wfm-section-heading > p:last-child,
+.wfm-install-steps,
+.wfm-command-tile p {
+  color: var(--cds-text-secondary);
+}
+
+.wfm-install-steps {
+  display: grid;
+  gap: spacing.$spacing-05;
+  margin: spacing.$spacing-08 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wfm-install-steps li {
+  @include type.type-style("body-02");
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: start;
+  border-top: 1px solid var(--cds-border-subtle);
+  padding-top: spacing.$spacing-05;
+}
+
+.wfm-install-steps span {
+  @include type.type-style("label-01");
+  color: var(--cds-text-helper);
+}
+
+.wfm-command-tile {
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$spacing-06;
+  background: var(--cds-layer-01);
+}
+
+.wfm-command-tile__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: spacing.$spacing-05;
+}
+
+.wfm-definition-tile {
+  background: var(--cds-layer-01);
+}
+
+.wfm-definition-tile dl {
+  margin: 0;
+}
+
+.wfm-definition-tile dl > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.7fr) 1fr;
+  gap: spacing.$spacing-05;
+  border-bottom: 1px solid var(--cds-border-subtle);
+  padding-block: spacing.$spacing-05;
+}
+
+.wfm-definition-tile dl > div:first-child {
+  padding-top: 0;
+}
+
+.wfm-definition-tile dl > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.wfm-definition-tile dt {
+  @include type.type-style("label-01");
+  color: var(--cds-text-secondary);
+}
+
+.wfm-definition-tile dd {
+  @include type.type-style("body-02");
+  margin: 0;
+}
+
+.wfm-showcase {
+  border-block: 1px solid var(--cds-border-subtle);
+  background: var(--cds-layer-01);
+}
+
+.wfm-showcase .cds--btn {
+  margin-top: spacing.$spacing-06;
+}
+
+.wfm-cta {
+  border-top: 1px solid var(--cds-border-subtle);
+  background: var(--cds-layer-01);
+}
+
+.wfm-cta p {
+  margin-top: spacing.$spacing-04;
+}
+
+.wfm-footer {
+  border-top: 1px solid var(--cds-border-subtle);
+  padding-block: spacing.$spacing-09;
+  background: var(--cds-background);
+}
+
+.wfm-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing.$spacing-06;
+  margin-bottom: spacing.$spacing-06;
+}
+
+@media (max-width: 65.999rem) {
+  .wfm-hero {
+    padding-block: spacing.$spacing-10;
+  }
+
+  .wfm-hero__copy {
+    margin-bottom: spacing.$spacing-09;
+  }
+
+  .wfm-actions--end {
+    justify-content: flex-start;
+    margin-top: spacing.$spacing-06;
+  }
+
+  .wfm-section,
+  .wfm-showcase,
+  .wfm-cta {
+    padding-block: spacing.$spacing-10;
+  }
+}
+
+@media (max-width: 41.999rem) {
+  .wfm-hero h1 {
+    @include type.type-style("heading-05");
+  }
+
+  .wfm-section-heading h2,
+  .wfm-cta h2 {
+    @include type.type-style("heading-05");
+  }
+
+  .wfm-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .wfm-actions .cds--btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  .wfm-definition-tile dl > div {
+    grid-template-columns: 1fr;
+    gap: spacing.$spacing-02;
+  }
+}

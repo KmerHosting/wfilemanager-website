@@ -90,12 +90,12 @@ for (const query of mediaQueries) {
 
 const productImages = [
   {
-    sourceRef: '"/wfilemanager-file-explorer.png"',
-    file: "public/wfilemanager-file-explorer.png",
+    sourceRef: '"/wfilemanager-file-explorer.svg"',
+    file: "public/wfilemanager-file-explorer.svg",
   },
   {
-    sourceRef: '"/wfilemanager-about-updates.png"',
-    file: "public/wfilemanager-about-updates.png",
+    sourceRef: '"/wfilemanager-about-updates.svg"',
+    file: "public/wfilemanager-about-updates.svg",
   },
 ];
 

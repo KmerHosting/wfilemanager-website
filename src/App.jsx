@@ -29,8 +29,8 @@ import {
   PRODUCT_VERSION,
 } from "./content.js";
 
-const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer-full.png";
-const UPDATES_SCREENSHOT = "/wfilemanager-about-updates-full.png";
+const EXPLORER_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792A88bNxrqJiUts8rS0IR3defGvx9NECu6nPMTw";
+const UPDATES_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792ATut7u7iOZdYmMatwgL5lNvVSXFPqR4Be1k7Doici";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
 
 function getInitialTheme() {

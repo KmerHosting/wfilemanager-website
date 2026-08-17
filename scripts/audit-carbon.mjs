@@ -1,5 +1,4 @@
-import { createHash } from "node:crypto";
-import { access, readdir, readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 
 async function collectFiles(directory) {
@@ -11,11 +10,6 @@ async function collectFiles(directory) {
     else files.push(path);
   }
   return files;
-}
-
-function gitBlobSha(bytes) {
-  const header = Buffer.from(`blob ${bytes.length}\0`);
-  return createHash("sha1").update(header).update(bytes).digest("hex");
 }
 
 const srcFiles = (await collectFiles("src")).filter((file) => [".jsx", ".js", ".scss"].includes(extname(file)));
@@ -68,7 +62,7 @@ for (const required of [
 }
 
 if (joinedSource.includes("<Theme ") || joinedSource.includes("<Theme>")) {
-  violations.push("Nested Carbon Theme wrappers are not allowed: GlobalTheme must control the whole website.");
+  violations.push("Nested Carbon Theme wrappers are not allowed: GlobalTheme must control the entire website.");
 }
 
 for (const requiredUse of [
@@ -100,47 +94,23 @@ for (const query of mediaQueries) {
 }
 
 const productImages = [
-  {
-    sourceRef: '"/wfilemanager-file-explorer-full.png"',
-    file: "public/wfilemanager-file-explorer-full.png",
-    gitSha: "40314193a3b0b28cd2a3b37d3eef89a9d6e96ed3",
-  },
-  {
-    sourceRef: '"/wfilemanager-about-updates-full.png"',
-    file: "public/wfilemanager-about-updates-full.png",
-    gitSha: "86ae1fd460c43fa09a5815c0213d485e071bafee",
-  },
+  "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792A88bNxrqJiUts8rS0IR3defGvx9NECu6nPMTw",
+  "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792ATut7u7iOZdYmMatwgL5lNvVSXFPqR4Be1k7Doici",
 ];
 
-for (const image of productImages) {
-  if (!joinedSource.includes(image.sourceRef)) {
-    violations.push(`Product imagery must reference ${image.sourceRef}.`);
-  }
-
-  try {
-    await access(image.file);
-    const bytes = await readFile(image.file);
-    if (gitBlobSha(bytes) !== image.gitSha) {
-      violations.push(`Product screenshot does not match the approved full PNG: ${image.file}.`);
-    }
-  } catch {
-    violations.push(`Missing product screenshot asset: ${image.file}.`);
+for (const imageUrl of productImages) {
+  if (!joinedSource.includes(`\"${imageUrl}\"`)) {
+    violations.push(`Product imagery must use the approved CDN asset: ${imageUrl}`);
   }
 }
-
-const canonicalProductImages = new Set(productImages.map(({ file }) => file));
 
 for (const directory of ["assets", "public"]) {
   try {
     for (const file of await collectFiles(directory)) {
       const normalized = file.replaceAll("\\", "/");
       if (normalized.endsWith("favicon.svg")) continue;
-      if (
-        normalized.includes("wfilemanager-") &&
-        /\.(png|jpe?g|svg|b64|webp)$/i.test(normalized) &&
-        !canonicalProductImages.has(normalized)
-      ) {
-        violations.push(`Stale product image must be removed: ${normalized}.`);
+      if (/wfilemanager-.*\.(png|jpe?g|svg|b64|webp)$/i.test(normalized)) {
+        violations.push(`Local or stale product image must be removed; CDN is canonical: ${normalized}`);
       }
     }
   } catch {

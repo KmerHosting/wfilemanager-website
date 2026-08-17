@@ -2,333 +2,264 @@ import {
   Accordion,
   AccordionItem,
   Button,
-  CodeSnippet,
   Column,
   Content,
   GlobalTheme,
   Grid,
-  Header,
-  HeaderContainer,
-  HeaderMenuButton,
-  HeaderMenuItem,
-  HeaderName,
-  HeaderNavigation,
   Link,
-  SideNav,
-  SideNavItems,
-  SideNavLink,
   SkipToContent,
+  StructuredListBody,
+  StructuredListCell,
+  StructuredListHead,
+  StructuredListRow,
+  StructuredListWrapper,
   Tag,
   Theme,
-  Tile,
 } from "@carbon/react";
 import { Download, Launch, LogoGithub } from "@carbon/icons-react";
-import explorerScreenshot from "../assets/wfilemanager-file-explorer.png";
-import updatesScreenshot from "../assets/wfilemanager-about-updates.png";
+import explorerScreenshot from "../assets/wfilemanager-file-explorer.webp";
+import updatesScreenshot from "../assets/wfilemanager-about-updates.webp";
+import { InstallSection } from "./components/InstallSection.jsx";
+import { ProductShot } from "./components/ProductShot.jsx";
+import { SiteFooter } from "./components/SiteFooter.jsx";
+import { SiteHeader } from "./components/SiteHeader.jsx";
+import {
+  ARCHITECTURE,
+  CAPABILITIES,
+  FAQ,
+  PRODUCT_FACTS,
+  PRODUCT_VERSION,
+} from "./content.js";
 
-const INSTALL_COMMAND =
-  "curl -fsSL https://igihzeyfgwhnuiflamvn.supabase.co/storage/v1/object/public/releases.kmerhosting.com/wfilemanager/install.sh | sudo bash";
-
-const features = [
-  ["01", "Browse the real filesystem", "Navigate directories directly on the server and work with files in their normal Linux locations."],
-  ["02", "Upload and download", "Transfer files with clear progress feedback for operations that take time."],
-  ["03", "Edit text files", "Open and save common text files directly from the browser without a separate editor service."],
-  ["04", "Copy and move", "Run larger filesystem operations as tracked background jobs instead of blocking the interface."],
-  ["05", "Trash and restore", "Move files to a local trash before permanent deletion and restore them when needed."],
-  ["06", "Update safely", "Install verified prebuilt releases with health checks, atomic activation and rollback."],
-];
-
-const principles = [
-  ["Local-first", "Your files and application data stay on your server."],
-  ["Single admin", "One local administrator account and no role system."],
-  ["Prebuilt runtime", "No application compilation on the target server."],
-  ["Atomic updates", "Verified releases with health checks and rollback."],
-];
-
-const MOBILE_NAV_ID = "wfm-mobile-navigation";
-
-function Navigation() {
+function Hero() {
   return (
-    <HeaderContainer
-      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-        <>
-          <Header aria-label="wFileManager website">
-            <HeaderMenuButton
-              aria-label={isSideNavExpanded ? "Close navigation" : "Open navigation"}
-              aria-expanded={isSideNavExpanded}
-              aria-controls={MOBILE_NAV_ID}
-              isActive={isSideNavExpanded}
-              onClick={onClickSideNavExpand}
-            />
-            <HeaderName href="#top" prefix="">
-              wFileManager
-            </HeaderName>
-            <HeaderNavigation aria-label="Primary navigation">
-              <HeaderMenuItem href="#features">Features</HeaderMenuItem>
-              <HeaderMenuItem href="#install">Install</HeaderMenuItem>
-              <HeaderMenuItem href="https://kmerhosting.com/docs">Docs</HeaderMenuItem>
-              <HeaderMenuItem href="https://github.com/KmerHosting/wfilemanager">GitHub</HeaderMenuItem>
-            </HeaderNavigation>
-          </Header>
-          <SideNav
-            id={MOBILE_NAV_ID}
-            aria-label="Mobile navigation"
-            expanded={isSideNavExpanded}
-            isPersistent={false}
-            onOverlayClick={onClickSideNavExpand}
-            onSideNavBlur={onClickSideNavExpand}
-          >
-            <SideNavItems>
-              <SideNavLink href="#features" onClick={onClickSideNavExpand}>
-                Features
-              </SideNavLink>
-              <SideNavLink href="#install" onClick={onClickSideNavExpand}>
-                Install
-              </SideNavLink>
-              <SideNavLink href="https://kmerhosting.com/docs">Documentation</SideNavLink>
-              <SideNavLink href="https://github.com/KmerHosting/wfilemanager">GitHub</SideNavLink>
-            </SideNavItems>
-          </SideNav>
-        </>
-      )}
-    />
+    <section id="top" className="wfm-hero" aria-labelledby="hero-title">
+      <Grid fullWidth>
+        <Column sm={4} md={8} lg={6} xlg={6}>
+          <div className="wfm-hero__copy">
+            <Tag type="blue" size="md">
+              Version {PRODUCT_VERSION}
+            </Tag>
+            <h1 id="hero-title">Manage Linux files without moving them somewhere else.</h1>
+            <p className="wfm-hero__lead">
+              wFileManager works directly with the filesystem already on your server. Browse, edit, upload, move,
+              recover and update from a focused local web interface.
+            </p>
+            <div className="wfm-actions">
+              <Button href="#install" renderIcon={Download}>
+                Install wFileManager
+              </Button>
+              <Button
+                href="https://github.com/KmerHosting/wfilemanager"
+                kind="tertiary"
+                renderIcon={LogoGithub}
+              >
+                View source
+              </Button>
+            </div>
+            <p className="wfm-hero__meta">Open source · Local-first · Single administrator · Ubuntu 20.04+</p>
+          </div>
+        </Column>
+        <Column sm={4} md={8} lg={10} xlg={10}>
+          <ProductShot
+            src={explorerScreenshot}
+            alt="wFileManager File Explorer showing Linux directories and file controls"
+            caption="File Explorer — the real Linux filesystem, managed from the browser."
+            eager
+          />
+        </Column>
+      </Grid>
+    </section>
   );
 }
 
-function App() {
+function ProductFacts() {
   return (
-    <GlobalTheme theme="white">
-      <SkipToContent href="#main-content" />
-      <Navigation />
-      <Content id="main-content" className="wfm-site-content">
-        <section id="top" className="wfm-hero" aria-labelledby="hero-title">
-          <Grid fullWidth>
-            <Column sm={4} md={8} lg={6} xlg={5}>
-              <div className="wfm-hero__copy">
-                <Tag type="blue" size="md">
-                  wFileManager 0.11.5
-                </Tag>
-                <h1 id="hero-title">File management for Linux servers, without the complexity.</h1>
-                <p className="wfm-hero__lead">
-                  Browse, edit, upload, move and recover files through a focused web interface. One local
-                  administrator, SQLite application data and no hosted backend.
-                </p>
-                <div className="wfm-actions">
-                  <Button href="#install" renderIcon={Download}>
-                    Install wFileManager
-                  </Button>
-                  <Button
-                    href="https://github.com/KmerHosting/wfilemanager"
-                    kind="tertiary"
-                    renderIcon={LogoGithub}
-                  >
-                    View on GitHub
-                  </Button>
-                </div>
-                <div className="wfm-meta" aria-label="Product information">
-                  <span>Open source</span>
-                  <span>MIT licensed</span>
-                  <span>Ubuntu 20.04+</span>
-                  <span>Local SQLite</span>
-                </div>
-              </div>
-            </Column>
-            <Column sm={4} md={8} lg={{ span: 10, offset: 6 }} xlg={{ span: 11, offset: 5 }}>
-              <div className="wfm-product-shot">
-                <img src={explorerScreenshot} alt="wFileManager File Explorer interface" />
-              </div>
-            </Column>
-          </Grid>
-        </section>
+    <section className="wfm-facts" aria-label="Product facts">
+      <Grid fullWidth condensed>
+        {PRODUCT_FACTS.map(({ value, label }) => (
+          <Column sm={2} md={2} lg={4} key={label}>
+            <div className="wfm-fact">
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </div>
+          </Column>
+        ))}
+      </Grid>
+    </section>
+  );
+}
 
-        <section className="wfm-proof" aria-label="wFileManager principles">
-          <Grid fullWidth condensed>
-            {principles.map(([title, description]) => (
-              <Column sm={4} md={4} lg={4} key={title}>
-                <Tile className="wfm-proof-tile">
-                  <h2>{title}</h2>
-                  <p>{description}</p>
-                </Tile>
-              </Column>
-            ))}
-          </Grid>
-        </section>
-
-        <section className="wfm-section" id="features" aria-labelledby="features-title">
-          <Grid fullWidth>
-            <Column sm={4} md={8} lg={8}>
-              <div className="wfm-section-heading">
-                <p className="wfm-eyebrow">Core capabilities</p>
-                <h2 id="features-title">Everything needed for day-to-day file management.</h2>
-                <p>Focused on direct Linux filesystem operations without adding another storage layer.</p>
-              </div>
-            </Column>
-          </Grid>
-          <Grid fullWidth condensed className="wfm-feature-grid">
-            {features.map(([number, title, description]) => (
-              <Column sm={4} md={4} lg={8} key={number}>
-                <Tile className="wfm-feature-tile">
-                  <span className="wfm-feature-number">{number}</span>
+function Capabilities() {
+  return (
+    <section id="features" className="wfm-band" aria-labelledby="features-title">
+      <Grid fullWidth>
+        <Column sm={4} md={8} lg={5}>
+          <div className="wfm-section-intro wfm-section-intro--sticky">
+            <p className="wfm-section-label">Core capabilities</p>
+            <h2 id="features-title">A small tool for the file work you do every day.</h2>
+            <p>
+              The interface stays close to Linux filesystem concepts instead of turning the server into a separate
+              storage product.
+            </p>
+            <Link href="https://kmerhosting.com/docs">Read the documentation</Link>
+          </div>
+        </Column>
+        <Column sm={4} md={8} lg={{ span: 10, offset: 6 }}>
+          <div className="wfm-capabilities">
+            {CAPABILITIES.map(({ number, title, description }) => (
+              <article className="wfm-capability" key={number}>
+                <span className="wfm-capability__number">{number}</span>
+                <div>
                   <h3>{title}</h3>
                   <p>{description}</p>
-                </Tile>
-              </Column>
-            ))}
-          </Grid>
-        </section>
-
-        <Theme theme="g100">
-          <section className="wfm-section wfm-install" id="install" aria-labelledby="install-title">
-            <Grid fullWidth>
-              <Column sm={4} md={8} lg={7}>
-                <div className="wfm-section-heading">
-                  <p className="wfm-eyebrow">Installation</p>
-                  <h2 id="install-title">One command. Prebuilt runtime.</h2>
-                  <p>
-                    The installer validates the server, downloads the published runtime, configures systemd and
-                    performs a health check. The server does not compile the application.
-                  </p>
                 </div>
-                <ol className="wfm-install-steps">
-                  <li><span>01</span> Run the command as root or with sudo.</li>
-                  <li><span>02</span> Open the displayed server URL.</li>
-                  <li><span>03</span> Enter the first-run setup code.</li>
-                  <li><span>04</span> Choose the administrator password.</li>
-                </ol>
-              </Column>
-              <Column sm={4} md={8} lg={{ span: 8, offset: 8 }}>
-                <Tile className="wfm-command-tile">
-                  <div className="wfm-command-tile__header">
-                    <h3>Install wFileManager</h3>
-                    <Tag type="green">Ubuntu</Tag>
-                  </div>
-                  <CodeSnippet type="multi" wrapText>
-                    {INSTALL_COMMAND}
-                  </CodeSnippet>
-                  <p>Copy the command, run it on the Linux server, then follow the setup URL.</p>
-                </Tile>
-              </Column>
-            </Grid>
-          </section>
-        </Theme>
+              </article>
+            ))}
+          </div>
+        </Column>
+      </Grid>
+    </section>
+  );
+}
 
-        <section className="wfm-section" aria-labelledby="architecture-title">
-          <Grid fullWidth>
-            <Column sm={4} md={8} lg={7}>
-              <div className="wfm-section-heading">
-                <p className="wfm-eyebrow">Architecture</p>
-                <h2 id="architecture-title">Simple by design.</h2>
-                <p>
-                  wFileManager avoids the infrastructure normally attached to control panels. There is no hosted
-                  account service and no application build on the target server.
-                </p>
-              </div>
-            </Column>
-            <Column sm={4} md={8} lg={{ span: 8, offset: 8 }}>
-              <Tile className="wfm-definition-tile">
-                <dl>
-                  <div><dt>Account</dt><dd>Single local administrator</dd></div>
-                  <div><dt>Database</dt><dd>SQLite on the server</dd></div>
-                  <div><dt>Runtime</dt><dd>Prebuilt Node.js application</dd></div>
-                  <div><dt>Service</dt><dd>systemd</dd></div>
-                  <div><dt>Updates</dt><dd>SHA-256 + atomic activation</dd></div>
-                  <div><dt>License</dt><dd>MIT</dd></div>
-                </dl>
-              </Tile>
-            </Column>
-          </Grid>
-        </section>
-
-        <section className="wfm-showcase" aria-labelledby="showcase-title">
-          <Grid fullWidth>
-            <Column sm={4} md={8} lg={6}>
-              <div className="wfm-section-heading">
-                <p className="wfm-eyebrow">Operations</p>
-                <h2 id="showcase-title">Updates stay visible and recoverable.</h2>
-                <p>
-                  The application checks published releases, reports update state and retains rollback support after
-                  activation.
-                </p>
+function ProductSection() {
+  return (
+    <Theme theme="g10">
+      <section id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
+        <Grid fullWidth>
+          <Column sm={4} md={8} lg={10}>
+            <ProductShot
+              src={updatesScreenshot}
+              alt="wFileManager About and updates screen showing release status"
+              caption="Updates remain visible, verified and recoverable."
+            />
+          </Column>
+          <Column sm={4} md={8} lg={6}>
+            <div className="wfm-section-intro wfm-product__copy">
+              <p className="wfm-section-label">Local by design</p>
+              <h2 id="product-title">Your files stay on the server. So does the application data.</h2>
+              <p>
+                There is no hosted account backend and no extra object-storage layer between the interface and the
+                files you are managing. Application state lives in local SQLite.
+              </p>
+              <div className="wfm-product__links">
                 <Button
-                  href="https://github.com/KmerHosting/wfilemanager/releases/tag/v0.11.5"
+                  href={`https://github.com/KmerHosting/wfilemanager/releases/tag/v${PRODUCT_VERSION}`}
                   kind="ghost"
                   renderIcon={Launch}
                 >
-                  View 0.11.5 release
+                  Release {PRODUCT_VERSION}
                 </Button>
               </div>
-            </Column>
-            <Column sm={4} md={8} lg={{ span: 10, offset: 6 }}>
-              <div className="wfm-product-shot wfm-product-shot--flat">
-                <img src={updatesScreenshot} alt="wFileManager About and updates interface" loading="lazy" />
-              </div>
-            </Column>
-          </Grid>
-        </section>
+            </div>
+          </Column>
+        </Grid>
+      </section>
+    </Theme>
+  );
+}
 
-        <section className="wfm-section" aria-labelledby="faq-title">
-          <Grid fullWidth>
-            <Column sm={4} md={8} lg={6}>
-              <div className="wfm-section-heading">
-                <p className="wfm-eyebrow">FAQ</p>
-                <h2 id="faq-title">Common questions.</h2>
-              </div>
-            </Column>
-            <Column sm={4} md={8} lg={{ span: 10, offset: 6 }}>
-              <Accordion align="start">
-                <AccordionItem title="Does wFileManager require a domain?">
-                  <p>No. It can run directly on the server IP and port 1973. A domain and HTTPS reverse proxy are optional.</p>
-                </AccordionItem>
-                <AccordionItem title="Where is application data stored?">
-                  <p>Application data is stored locally in SQLite. Files remain in their normal locations on the Linux filesystem.</p>
-                </AccordionItem>
-                <AccordionItem title="Does it support multiple users?">
-                  <p>No. wFileManager intentionally uses one local administrator account.</p>
-                </AccordionItem>
-                <AccordionItem title="How do I reset the administrator password?">
-                  <p>Run <code>sudo wfilemanager-reset-admin-password</code> from a trusted server shell.</p>
-                </AccordionItem>
-              </Accordion>
-            </Column>
-          </Grid>
-        </section>
+function Architecture() {
+  return (
+    <section id="architecture" className="wfm-band" aria-labelledby="architecture-title">
+      <Grid fullWidth>
+        <Column sm={4} md={8} lg={6}>
+          <div className="wfm-section-intro">
+            <p className="wfm-section-label">Architecture</p>
+            <h2 id="architecture-title">Intentionally uncomplicated.</h2>
+            <p>
+              wFileManager is designed to be understandable on a single Linux server: one account, one local
+              database, one service and verified prebuilt releases.
+            </p>
+          </div>
+        </Column>
+        <Column sm={4} md={8} lg={{ span: 9, offset: 7 }}>
+          <StructuredListWrapper className="wfm-architecture-list" aria-label="wFileManager architecture">
+            <StructuredListHead>
+              <StructuredListRow head>
+                <StructuredListCell head>Area</StructuredListCell>
+                <StructuredListCell head>Implementation</StructuredListCell>
+              </StructuredListRow>
+            </StructuredListHead>
+            <StructuredListBody>
+              {ARCHITECTURE.map(([area, implementation]) => (
+                <StructuredListRow key={area}>
+                  <StructuredListCell>{area}</StructuredListCell>
+                  <StructuredListCell>{implementation}</StructuredListCell>
+                </StructuredListRow>
+              ))}
+            </StructuredListBody>
+          </StructuredListWrapper>
+        </Column>
+      </Grid>
+    </section>
+  );
+}
 
-        <section className="wfm-cta" aria-labelledby="cta-title">
-          <Grid fullWidth>
-            <Column sm={4} md={8} lg={10}>
-              <h2 id="cta-title">Manage your server files from the browser.</h2>
-              <p>Open source, local-first and intentionally small.</p>
-            </Column>
-            <Column sm={4} md={8} lg={{ span: 6, offset: 10 }}>
-              <div className="wfm-actions wfm-actions--end">
-                <Button href="#install">Install now</Button>
-                <Button href="https://kmerhosting.com/docs" kind="tertiary" renderIcon={Launch}>
-                  Documentation
-                </Button>
-              </div>
-            </Column>
-          </Grid>
-        </section>
+function Faq() {
+  return (
+    <section className="wfm-band wfm-faq" aria-labelledby="faq-title">
+      <Grid fullWidth>
+        <Column sm={4} md={8} lg={5}>
+          <div className="wfm-section-intro">
+            <p className="wfm-section-label">FAQ</p>
+            <h2 id="faq-title">Before you install.</h2>
+          </div>
+        </Column>
+        <Column sm={4} md={8} lg={{ span: 10, offset: 6 }}>
+          <Accordion align="start">
+            {FAQ.map(([question, answer]) => (
+              <AccordionItem title={question} key={question}>
+                <p>{answer}</p>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </Column>
+      </Grid>
+    </section>
+  );
+}
 
-        <footer className="wfm-footer">
-          <Grid fullWidth>
-            <Column sm={4} md={4} lg={8}>
-              <h2>wFileManager</h2>
-              <p>A lightweight web file manager for Linux servers.</p>
-            </Column>
-            <Column sm={4} md={4} lg={{ span: 8, offset: 8 }}>
-              <div className="wfm-footer__links">
-                <Link href="https://github.com/KmerHosting/wfilemanager">GitHub</Link>
-                <Link href="https://kmerhosting.com/docs">Documentation</Link>
-                <Link href="https://kmerhosting.com">KmerHosting</Link>
-              </div>
-              <p>© {new Date().getFullYear()} KmerHosting LLC.</p>
-            </Column>
-          </Grid>
-        </footer>
+function FinalCta() {
+  return (
+    <Theme theme="g100">
+      <section className="wfm-final-cta" aria-labelledby="cta-title">
+        <Grid fullWidth>
+          <Column sm={4} md={8} lg={9}>
+            <h2 id="cta-title">Put a focused file manager on your Linux server.</h2>
+            <p>No hosted account. No remote storage layer. No server-side application compilation.</p>
+          </Column>
+          <Column sm={4} md={8} lg={{ span: 6, offset: 10 }}>
+            <div className="wfm-actions wfm-actions--end">
+              <Button href="#install">Install now</Button>
+              <Button href="https://kmerhosting.com/docs" kind="tertiary" renderIcon={Launch}>
+                Documentation
+              </Button>
+            </div>
+          </Column>
+        </Grid>
+      </section>
+    </Theme>
+  );
+}
+
+export default function App() {
+  return (
+    <GlobalTheme theme="white">
+      <SkipToContent href="#main-content" />
+      <SiteHeader />
+      <Content id="main-content" className="wfm-site-content">
+        <Hero />
+        <ProductFacts />
+        <Capabilities />
+        <ProductSection />
+        <InstallSection />
+        <Architecture />
+        <Faq />
+        <FinalCta />
+        <SiteFooter />
       </Content>
     </GlobalTheme>
   );
 }
-
-export default App;

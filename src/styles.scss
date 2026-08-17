@@ -1,4 +1,5 @@
 @use "@carbon/react";
+@use "@carbon/styles/scss/breakpoint" as breakpoint;
 @use "@carbon/styles/scss/spacing" as spacing;
 @use "@carbon/styles/scss/type" as type;
 
@@ -296,7 +297,7 @@ code {
   margin-bottom: spacing.$spacing-06;
 }
 
-@media (max-width: 65.999rem) {
+@include breakpoint.breakpoint-down(lg) {
   .wfm-hero {
     padding-block: spacing.$spacing-10;
   }
@@ -317,7 +318,7 @@ code {
   }
 }
 
-@media (max-width: 41.999rem) {
+@include breakpoint.breakpoint-down(md) {
   .wfm-hero h1 {
     @include type.type-style("heading-05");
   }

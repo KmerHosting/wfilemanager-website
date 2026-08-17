@@ -2,17 +2,19 @@
 
 Official website for [wFileManager](https://github.com/KmerHosting/wfilemanager), a lightweight local-first web file manager for Linux servers.
 
-## Frontend
+## Frontend architecture
 
-The website is a React/Vite application built directly on IBM Carbon Design System:
+This website is intentionally built as a Carbon-native React/Vite application. The public interface is composed from `@carbon/react`, `@carbon/icons-react`, Carbon UI Shell, Grid, themes, semantic color tokens, typography, spacing, breakpoints and motion APIs.
 
-- `@carbon/react`
-- `@carbon/icons-react`
-- Carbon UI Shell
-- Carbon Grid, Tile, Tag, Accordion, CodeSnippet, Link and Button components
-- Carbon semantic tokens, typography and spacing
+The design contract is deliberately strict:
 
-A repository audit rejects parallel UI systems and non-Carbon visual treatments in the application surface.
+- Carbon components are used for interactive controls and navigation.
+- Colors are bound to `--cds-*` semantic tokens instead of copied color values.
+- Responsive behavior uses Carbon breakpoint Sass utilities.
+- Motion uses Carbon motion durations/easing and respects reduced-motion preferences.
+- The website uses the official White, G10 and G100 theme contexts rather than custom theme palettes.
+- Product screenshots are real wFileManager UI captures.
+- A repository audit rejects parallel UI systems, raw colors, custom gradients/shadows/radii, native controls and hand-written responsive media queries.
 
 ## Development
 
@@ -21,15 +23,15 @@ npm install
 npm run dev
 ```
 
-Production validation:
+Full validation:
 
 ```bash
-npm run audit:carbon
-npm run build
+npm run check
 ```
 
 ## Product links
 
 - wFileManager: https://github.com/KmerHosting/wfilemanager
+- Releases: https://github.com/KmerHosting/wfilemanager/releases
 - Documentation: https://kmerhosting.com/docs
 - KmerHosting: https://kmerhosting.com

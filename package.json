@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "audit:carbon": "node scripts/audit-carbon.mjs"
+    "audit:carbon": "node scripts/audit-carbon.mjs",
+    "check": "npm run audit:carbon && npm run build"
   },
   "dependencies": {
     "@carbon/icons-react": "11.86.0",

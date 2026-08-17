@@ -1,0 +1,1 @@
+Real raster screenshot assets are stored as WebP files.

@@ -17,18 +17,18 @@ if (menuButton && mobileNav) {
   });
 }
 
-// Use a real application capture in the hero instead of a handcrafted mockup.
+// Use the real local application capture in the hero.
 const productWindow = document.querySelector('.product-window');
 if (productWindow) {
   productWindow.setAttribute('aria-label', 'Real wFileManager File Explorer screenshot');
   productWindow.replaceChildren();
   productWindow.style.minHeight = '0';
-  productWindow.style.aspectRatio = '1000 / 475';
+  productWindow.style.aspectRatio = '1599 / 765';
   productWindow.style.background = '#f4f4f4';
   productWindow.style.borderColor = '#c6c6c6';
 
   const screenshot = document.createElement('img');
-  screenshot.src = 'assets/wfilemanager-file-explorer.svg';
+  screenshot.src = '/assets/wfilemanager-file-explorer.png';
   screenshot.alt = 'wFileManager File Explorer';
   screenshot.loading = 'eager';
   screenshot.decoding = 'async';

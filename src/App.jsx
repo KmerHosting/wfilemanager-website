@@ -17,8 +17,6 @@ import {
   Theme,
 } from "@carbon/react";
 import { Download, Launch, LogoGithub } from "@carbon/icons-react";
-import explorerScreenshot from "../assets/wfilemanager-file-explorer.webp";
-import updatesScreenshot from "../assets/wfilemanager-about-updates.webp";
 import { InstallSection } from "./components/InstallSection.jsx";
 import { ProductShot } from "./components/ProductShot.jsx";
 import { SiteFooter } from "./components/SiteFooter.jsx";
@@ -30,6 +28,9 @@ import {
   PRODUCT_FACTS,
   PRODUCT_VERSION,
 } from "./content.js";
+
+const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer.png";
+const UPDATES_SCREENSHOT = "/wfilemanager-about-updates.png";
 
 function Hero() {
   return (
@@ -62,7 +63,7 @@ function Hero() {
         </Column>
         <Column sm={4} md={8} lg={10} xlg={10}>
           <ProductShot
-            src={explorerScreenshot}
+            src={EXPLORER_SCREENSHOT}
             alt="wFileManager File Explorer showing Linux directories and file controls"
             caption="File Explorer — the real Linux filesystem, managed from the browser."
             eager
@@ -130,7 +131,7 @@ function ProductSection() {
         <Grid fullWidth>
           <Column sm={4} md={8} lg={10}>
             <ProductShot
-              src={updatesScreenshot}
+              src={UPDATES_SCREENSHOT}
               alt="wFileManager About and updates screen showing release status"
               caption="Updates remain visible, verified and recoverable."
             />

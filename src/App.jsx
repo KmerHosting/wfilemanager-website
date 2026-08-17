@@ -29,8 +29,8 @@ import {
   PRODUCT_VERSION,
 } from "./content.js";
 
-const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer.png";
-const UPDATES_SCREENSHOT = "/wfilemanager-about-updates.png";
+const EXPLORER_SCREENSHOT = "/wfilemanager-file-explorer.svg";
+const UPDATES_SCREENSHOT = "/wfilemanager-about-updates.svg";
 
 function Hero() {
   return (

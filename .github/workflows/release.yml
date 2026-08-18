@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-          VERSION="$(node -p "require('./package.json').version")"
+          VERSION="$(tr -d '[:space:]' < .release-version)"
           [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
       - name: Publish release

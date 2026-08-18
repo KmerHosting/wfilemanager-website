@@ -4,7 +4,7 @@ Official website for [wFileManager](https://github.com/KmerHosting/wfilemanager)
 
 ## Frontend architecture
 
-This website is intentionally built as a Carbon-native React/Vite application. The public interface is composed from `@carbon/react`, `@carbon/icons-react`, Carbon UI Shell, Grid, themes, semantic color tokens, typography, spacing, breakpoints and motion APIs.
+This website is intentionally built as a Carbon-native React/Vite application. The public interface is composed from `@carbon/react`, `@carbon/icons-react`, `@carbon/themes`, Carbon UI Shell, Grid, Layer, semantic color tokens, typography, spacing, breakpoints and motion APIs.
 
 The design contract is deliberately strict:
 
@@ -12,7 +12,9 @@ The design contract is deliberately strict:
 - Colors are bound to `--cds-*` semantic tokens instead of copied color values.
 - Responsive behavior uses Carbon breakpoint Sass utilities.
 - Motion uses Carbon motion durations/easing and respects reduced-motion preferences.
-- The global theme toggles between Carbon White and G100, with scoped Carbon theme zones for contrast.
+- `GlobalTheme` and `data-carbon-theme` are synchronized, while Sass emits the official Carbon White, G10, G90 and G100 theme maps.
+- The website uses G10 for the default light experience and G90 for dark mode, avoiding the previous extreme white/G100 presentation.
+- Carbon `Layer` with `withBackground` provides contextual tonal hierarchy between alternating sections in both light and dark themes.
 - Product imagery is limited to the two current wFileManager captures: File Explorer and About & updates.
 - A repository audit rejects parallel UI systems, raw colors, custom gradients/shadows/radii, native controls, hand-written responsive media queries and stale screenshot formats.
 

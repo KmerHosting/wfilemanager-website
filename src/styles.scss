@@ -1,8 +1,39 @@
 @use "@carbon/react";
+@use "@carbon/themes/scss/theme" as carbon-theme;
+@use "@carbon/themes/scss/themes" as carbon-themes;
 @use "@carbon/styles/scss/breakpoint" as breakpoint;
 @use "@carbon/styles/scss/motion" as motion;
 @use "@carbon/styles/scss/spacing" as spacing;
 @use "@carbon/styles/scss/type" as type;
+
+// GlobalTheme synchronizes React context. These selectors apply the actual
+// Carbon token maps to the document, as required by Carbon's Theme guidance.
+// g10/g90 are the product defaults; white/g100 remain supported for migration
+// and future explicit theme selection.
+:root {
+  @include carbon-theme.theme(carbon-themes.$g10);
+  color-scheme: light;
+}
+
+:root[data-carbon-theme="white"] {
+  @include carbon-theme.theme(carbon-themes.$white);
+  color-scheme: light;
+}
+
+:root[data-carbon-theme="g10"] {
+  @include carbon-theme.theme(carbon-themes.$g10);
+  color-scheme: light;
+}
+
+:root[data-carbon-theme="g90"] {
+  @include carbon-theme.theme(carbon-themes.$g90);
+  color-scheme: dark;
+}
+
+:root[data-carbon-theme="g100"] {
+  @include carbon-theme.theme(carbon-themes.$g100);
+  color-scheme: dark;
+}
 
 html {
   scroll-behavior: smooth;
@@ -96,7 +127,7 @@ code {
 .wfm-product-frame {
   overflow: hidden;
   border: 1px solid var(--cds-border-subtle-01);
-  background: var(--cds-layer-01);
+  background: var(--cds-background);
 }
 
 .wfm-product-frame img {
@@ -121,14 +152,13 @@ code {
 
 .wfm-facts {
   border-block: 1px solid var(--cds-border-subtle-01);
-  background: var(--cds-layer-01);
 }
 
 .wfm-fact {
   min-block-size: 9rem;
   padding: spacing.$spacing-06;
   border-inline-start: 1px solid var(--cds-border-subtle-01);
-  background: var(--cds-layer-01);
+  background: transparent;
 }
 
 .wfm-fact strong,
@@ -219,7 +249,6 @@ code {
 
 .wfm-product {
   border-block: 1px solid var(--cds-border-subtle-01);
-  background: var(--cds-background);
 }
 
 .wfm-product__copy {
@@ -277,6 +306,10 @@ code {
   margin-block-start: spacing.$spacing-07;
 }
 
+.wfm-architecture {
+  border-block: 1px solid var(--cds-border-subtle-01);
+}
+
 .wfm-architecture-list {
   margin: 0;
 }
@@ -288,7 +321,7 @@ code {
 
 .wfm-faq {
   border-block-start: 1px solid var(--cds-border-subtle-01);
-  background: var(--cds-layer-01);
+  background: var(--cds-background);
 }
 
 .wfm-faq .cds--accordion__content p {
@@ -299,7 +332,6 @@ code {
 }
 
 .wfm-final-cta {
-  background: var(--cds-background);
   color: var(--cds-text-primary);
 }
 

@@ -1,4 +1,4 @@
-export const PRODUCT_VERSION = "0.11.5";
+export const PRODUCT_VERSION = "0.11.7";
 
 export const INSTALL_COMMAND =
   "curl -fsSL https://igihzeyfgwhnuiflamvn.supabase.co/storage/v1/object/public/releases.kmerhosting.com/wfilemanager/install.sh | sudo bash";
@@ -31,55 +31,43 @@ export const CAPABILITIES = [
   },
   {
     number: "04",
-    title: "Copy and move safely",
+    title: "Move, copy, rename and delete",
     description:
-      "Run larger filesystem operations as background jobs so the interface stays responsive while the server does the work.",
+      "Perform the filesystem operations you expect from a server file manager, with destructive actions surfaced explicitly.",
   },
   {
     number: "05",
-    title: "Trash and restore",
+    title: "Trash and recovery",
     description:
-      "Move files to a local trash before permanent deletion and restore them when a mistake needs to be reversed.",
+      "Deleted items can be reviewed and restored from the Trash view before they are removed permanently.",
   },
   {
     number: "06",
-    title: "Update with rollback",
+    title: "Operational updates",
     description:
-      "Install verified prebuilt releases with health checks, atomic activation and a rollback path if a new version does not become healthy.",
+      "Check the installed release, inspect the available version and update using the same verified prebuilt runtime model as installation.",
   },
 ];
 
-export const INSTALL_STEPS = [
-  ["01", "Run the installer", "Use root or sudo on a supported Ubuntu server."],
-  ["02", "Open the setup URL", "The installer prints the address and first-run setup code."],
-  ["03", "Create the administrator password", "Finish setup locally; no hosted account service is required."],
-];
-
 export const ARCHITECTURE = [
-  ["Account model", "Single local administrator"],
-  ["Application data", "SQLite on the server"],
-  ["Managed files", "Normal Linux filesystem paths"],
-  ["Runtime", "Prebuilt Node.js application"],
-  ["Service manager", "systemd"],
-  ["Update verification", "SHA-256 + health check + atomic activation"],
-  ["License", "MIT"],
+  ["Files", "Direct Linux filesystem access"],
+  ["Application data", "Local SQLite"],
+  ["Administrator", "One local account"],
+  ["Runtime", "Prebuilt Linux x64 release"],
+  ["Service", "systemd"],
+  ["Updates", "Atomic replacement with rollback"],
 ];
 
 export const FAQ = [
-  [
-    "Does wFileManager require a domain?",
-    "No. It can run directly on the server IP and port 1973. A domain and HTTPS reverse proxy are optional.",
-  ],
-  [
-    "Where is application data stored?",
-    "Application data is stored locally in SQLite. Managed files remain in their normal locations on the Linux filesystem.",
-  ],
-  [
-    "Does it support multiple users?",
-    "No. wFileManager intentionally uses one local administrator account.",
-  ],
-  [
-    "How do I reset the administrator password?",
-    "Run sudo wfilemanager-reset-admin-password from a trusted shell on the server.",
-  ],
+  ["Does wFileManager upload my files to KmerHosting?", "No. Files remain on the Linux server where wFileManager is installed."],
+  ["Does the server need Bun or Node.js?", "No. Production installation uses the published prebuilt runtime."],
+  ["Can I create multiple administrator accounts?", "No. wFileManager intentionally has one local administrator account named admin."],
+  ["How do I recover a forgotten administrator password?", "Run the server-side reset command from a trusted shell on the host."],
+  ["How are updates installed?", "The updater downloads the published runtime, validates it and performs an atomic replacement with rollback support."],
+];
+
+export const INSTALL_STEPS = [
+  ["01", "Run the installer", "Execute the one-line installer as root or through sudo."],
+  ["02", "Open the local interface", "The installer prints the address and one-time setup code after the service is healthy."],
+  ["03", "Create the administrator", "Use the setup code to create the fixed local admin account and choose its password."],
 ];

@@ -7,6 +7,7 @@ import {
   Content,
   GlobalTheme,
   Grid,
+  Layer,
   Link,
   SkipToContent,
   StructuredListBody,
@@ -32,12 +33,21 @@ import {
 const EXPLORER_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792A88bNxrqJiUts8rS0IR3defGvx9NECu6nPMTw";
 const UPDATES_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792ATut7u7iOZdYmMatwgL5lNvVSXFPqR4Be1k7D";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
+const LIGHT_THEME = "g10";
+const DARK_THEME = "g90";
 
 function getInitialTheme() {
-  if (typeof window === "undefined") return "white";
+  if (typeof window === "undefined") return LIGHT_THEME;
+
   const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
-  if (saved === "white" || saved === "g100") return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "g100" : "white";
+  if (saved === LIGHT_THEME || saved === DARK_THEME) return saved;
+
+  // Migrate the previous extreme white/g100 preference to the softer
+  // Carbon gray theme pair without breaking existing visitors.
+  if (saved === "white") return LIGHT_THEME;
+  if (saved === "g100") return DARK_THEME;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? DARK_THEME : LIGHT_THEME;
 }
 
 function Hero() {
@@ -84,7 +94,7 @@ function Hero() {
 
 function ProductFacts() {
   return (
-    <section className="wfm-facts" aria-label="Product facts">
+    <Layer as="section" withBackground className="wfm-facts" aria-label="Product facts">
       <Grid fullWidth condensed>
         {PRODUCT_FACTS.map(({ value, label }) => (
           <Column sm={2} md={2} lg={4} key={label}>
@@ -95,7 +105,7 @@ function ProductFacts() {
           </Column>
         ))}
       </Grid>
-    </section>
+    </Layer>
   );
 }
 
@@ -134,7 +144,7 @@ function Capabilities() {
 
 function ProductSection() {
   return (
-    <section id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
+    <Layer as="section" withBackground id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
       <Grid fullWidth>
         <Column sm={4} md={8} lg={10}>
           <ProductShot
@@ -163,13 +173,19 @@ function ProductSection() {
           </div>
         </Column>
       </Grid>
-    </section>
+    </Layer>
   );
 }
 
 function Architecture() {
   return (
-    <section id="architecture" className="wfm-band" aria-labelledby="architecture-title">
+    <Layer
+      as="section"
+      withBackground
+      id="architecture"
+      className="wfm-band wfm-architecture"
+      aria-labelledby="architecture-title"
+    >
       <Grid fullWidth>
         <Column sm={4} md={8} lg={6}>
           <div className="wfm-section-intro">
@@ -200,7 +216,7 @@ function Architecture() {
           </StructuredListWrapper>
         </Column>
       </Grid>
-    </section>
+    </Layer>
   );
 }
 
@@ -230,7 +246,7 @@ function Faq() {
 
 function FinalCta() {
   return (
-    <section className="wfm-final-cta" aria-labelledby="cta-title">
+    <Layer as="section" withBackground className="wfm-final-cta" aria-labelledby="cta-title">
       <Grid fullWidth>
         <Column sm={4} md={8} lg={9}>
           <h2 id="cta-title">Put a focused file manager on your Linux server.</h2>
@@ -245,7 +261,7 @@ function FinalCta() {
           </div>
         </Column>
       </Grid>
-    </section>
+    </Layer>
   );
 }
 
@@ -257,7 +273,7 @@ export default function App() {
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((current) => (current === "g100" ? "white" : "g100"));
+  const toggleTheme = () => setTheme((current) => (current === DARK_THEME ? LIGHT_THEME : DARK_THEME));
 
   return (
     <GlobalTheme theme={theme}>

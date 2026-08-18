@@ -30,8 +30,8 @@ import {
   PRODUCT_VERSION,
 } from "./content.js";
 
-const EXPLORER_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792A88bNxrqJiUts8rS0IR3defGvx9NECu6nPMTw";
-const UPDATES_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792ATut7u7iOZdYmMatwgL5lNvVSXFPqR4Be1k7D";
+const EXPLORER_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AMSMyjvFWVC8ItGhe1ncdDsNoprKq6wR4HgXu";
+const UPDATES_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AtzrPvR2gvE2d3BZCY65rShHDN8URIqu0yi7T";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
 const LIGHT_THEME = "g10";
 const DARK_THEME = "g90";

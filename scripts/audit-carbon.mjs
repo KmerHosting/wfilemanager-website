@@ -16,10 +16,11 @@ const srcFiles = (await collectFiles("src")).filter((file) => [".jsx", ".js", ".
 const sources = Object.fromEntries(await Promise.all(srcFiles.map(async (file) => [file, await readFile(file, "utf8")])));
 const joinedSource = Object.values(sources).join("\n");
 const styles = sources["src/styles.scss"] || "";
+const app = sources["src/App.jsx"] || "";
 const pkg = JSON.parse(await readFile("package.json", "utf8"));
 const violations = [];
 
-for (const dependency of ["@carbon/react", "@carbon/icons-react"]) {
+for (const dependency of ["@carbon/react", "@carbon/icons-react", "@carbon/themes"]) {
   if (!pkg.dependencies?.[dependency]) violations.push(`Missing production dependency: ${dependency}`);
 }
 
@@ -57,6 +58,7 @@ for (const required of [
   "<CodeSnippet",
   "<StructuredListWrapper",
   "<Accordion",
+  '<Layer as="section" withBackground',
 ]) {
   if (!joinedSource.includes(required)) violations.push(`Canonical Carbon requirement is missing: ${required}`);
 }
@@ -67,16 +69,35 @@ if (joinedSource.includes("<Theme ") || joinedSource.includes("<Theme>")) {
 
 for (const requiredUse of [
   '@use "@carbon/react"',
+  '@use "@carbon/themes/scss/theme"',
+  '@use "@carbon/themes/scss/themes"',
   '@carbon/styles/scss/breakpoint',
   '@carbon/styles/scss/motion',
   '@carbon/styles/scss/spacing',
   '@carbon/styles/scss/type',
+  "carbon-theme.theme(carbon-themes.$white)",
+  "carbon-theme.theme(carbon-themes.$g10)",
+  "carbon-theme.theme(carbon-themes.$g90)",
+  "carbon-theme.theme(carbon-themes.$g100)",
   "motion.motion(",
   "breakpoint.breakpoint-down(",
   "type.type-style(",
   "var(--cds-",
 ]) {
   if (!styles.includes(requiredUse)) violations.push(`Carbon style foundation is missing: ${requiredUse}`);
+}
+
+for (const requiredThemeBehavior of [
+  'const LIGHT_THEME = "g10"',
+  'const DARK_THEME = "g90"',
+  'document.documentElement.setAttribute("data-carbon-theme", theme)',
+  'window.matchMedia("(prefers-color-scheme: dark)")',
+  'saved === "white"',
+  'saved === "g100"',
+]) {
+  if (!app.includes(requiredThemeBehavior)) {
+    violations.push(`Carbon theme behavior is missing: ${requiredThemeBehavior}`);
+  }
 }
 
 const rawColorPattern = /#[0-9a-fA-F]{3,8}\b|\brgba?\(|\bhsla?\(/;

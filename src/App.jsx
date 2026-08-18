@@ -31,7 +31,7 @@ import {
 } from "./content.js";
 
 const HERO_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AtzrPvR2gvE2d3BZCY65rShHDN8URIqu0yi7T";
-const PRODUCT_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AMSMyjvFWVC8ItGhe1ncdDsNoprKq6wR4HgXu";
+const PRODUCT_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AxXpZKMDLXUT3oGYItAMD0sfm6RrbQCke5xyH";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
 const LIGHT_THEME = "g10";
 const DARK_THEME = "g90";

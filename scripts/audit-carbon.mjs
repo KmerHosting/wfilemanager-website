@@ -116,7 +116,7 @@ for (const query of mediaQueries) {
 
 const productImages = [
   "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AtzrPvR2gvE2d3BZCY65rShHDN8URIqu0yi7T",
-  "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AMSMyjvFWVC8ItGhe1ncdDsNoprKq6wR4HgXu",
+  "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AxXpZKMDLXUT3oGYItAMD0sfm6RrbQCke5xyH",
 ];
 
 for (const imageUrl of productImages) {

@@ -30,8 +30,8 @@ import {
   PRODUCT_VERSION,
 } from "./content.js";
 
-const EXPLORER_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AMSMyjvFWVC8ItGhe1ncdDsNoprKq6wR4HgXu";
-const UPDATES_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AtzrPvR2gvE2d3BZCY65rShHDN8URIqu0yi7T";
+const HERO_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AtzrPvR2gvE2d3BZCY65rShHDN8URIqu0yi7T";
+const PRODUCT_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AxXpZKMDLXUT3oGYItAMD0sfm6RrbQCke5xyH";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
 const LIGHT_THEME = "g10";
 const DARK_THEME = "g90";
@@ -81,9 +81,9 @@ function Hero() {
         </Column>
         <Column sm={4} md={8} lg={10} xlg={10}>
           <ProductShot
-            src={UPDATES_SCREENSHOT}
-            alt="wFileManager About and updates screen showing release status"
-            caption="Updates remain visible, verified and recoverable."
+            src={HERO_SCREENSHOT}
+            alt="wFileManager File Explorer showing Linux directories and file controls"
+            caption="File Explorer — the real Linux filesystem, managed from the browser."
             eager
           />
         </Column>
@@ -148,9 +148,9 @@ function ProductSection() {
       <Grid fullWidth>
         <Column sm={4} md={8} lg={10}>
           <ProductShot
-            src={EXPLORER_SCREENSHOT}
-            alt="wFileManager File Explorer showing Linux directories and file controls"
-            caption="File Explorer — the real Linux filesystem, managed from the browser."
+            src={PRODUCT_SCREENSHOT}
+            alt="wFileManager About and updates screen showing release status"
+            caption="Updates remain visible, verified and recoverable."
           />
         </Column>
         <Column sm={4} md={8} lg={6}>

@@ -23,7 +23,7 @@ const primaryItems = [
 ];
 
 export function SiteHeader({ theme, onToggleTheme }) {
-  const isDark = theme === "g100";
+  const isDark = theme === "g90" || theme === "g100";
   const ThemeIcon = isDark ? Light : Moon;
   const targetTheme = isDark ? "light" : "dark";
 

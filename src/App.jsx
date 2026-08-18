@@ -33,6 +33,9 @@ import {
 const HERO_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AtzrPvR2gvE2d3BZCY65rShHDN8URIqu0yi7T";
 const PRODUCT_SCREENSHOT = "https://i9x6ydbcdo.ufs.sh/f/CUIaGkT8792AxXpZKMDLXUT3oGYItAMD0sfm6RrbQCke5xyH";
 const THEME_STORAGE_KEY = "wfilemanager-website-theme";
+const RELEASE_CACHE_KEY = "wfilemanager-latest-release";
+const RELEASE_CACHE_TTL = 5 * 60 * 1000;
+const LATEST_RELEASE_API = "https://api.github.com/repos/KmerHosting/wfilemanager/releases/latest";
 const LIGHT_THEME = "g10";
 const DARK_THEME = "g90";
 
@@ -42,22 +45,74 @@ function getInitialTheme() {
   const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
   if (saved === LIGHT_THEME || saved === DARK_THEME) return saved;
 
-  // Migrate the previous extreme white/g100 preference to the softer
-  // Carbon gray theme pair without breaking existing visitors.
   if (saved === "white") return LIGHT_THEME;
   if (saved === "g100") return DARK_THEME;
 
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? DARK_THEME : LIGHT_THEME;
 }
 
-function Hero() {
+function normalizeReleaseVersion(tagName) {
+  const match = String(tagName || "").match(/^v?(\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?)$/);
+  return match?.[1] || null;
+}
+
+function getCachedReleaseVersion() {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const cached = JSON.parse(window.localStorage.getItem(RELEASE_CACHE_KEY) || "null");
+    if (!cached?.version || !cached?.savedAt) return null;
+    if (Date.now() - cached.savedAt > RELEASE_CACHE_TTL) return null;
+    return normalizeReleaseVersion(cached.version);
+  } catch {
+    return null;
+  }
+}
+
+function useProductVersion() {
+  const [productVersion, setProductVersion] = useState(() => getCachedReleaseVersion() || PRODUCT_VERSION);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch(LATEST_RELEASE_API, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: { Accept: "application/vnd.github+json" },
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`GitHub release lookup failed with ${response.status}`);
+        return response.json();
+      })
+      .then((release) => {
+        const version = normalizeReleaseVersion(release?.tag_name);
+        if (!version) return;
+        setProductVersion(version);
+        window.localStorage.setItem(
+          RELEASE_CACHE_KEY,
+          JSON.stringify({ version, savedAt: Date.now() }),
+        );
+      })
+      .catch((error) => {
+        if (error?.name !== "AbortError") {
+          // Keep the bundled fallback version if GitHub is temporarily unavailable.
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  return productVersion;
+}
+
+function Hero({ productVersion }) {
   return (
     <section id="top" className="wfm-hero" aria-labelledby="hero-title">
       <Grid fullWidth>
         <Column sm={4} md={8} lg={6} xlg={6}>
           <div className="wfm-hero__copy">
             <Tag type="blue" size="md">
-              Version {PRODUCT_VERSION}
+              Version {productVersion}
             </Tag>
             <h1 id="hero-title">Manage Linux files without moving them somewhere else.</h1>
             <p className="wfm-hero__lead">
@@ -142,7 +197,7 @@ function Capabilities() {
   );
 }
 
-function ProductSection() {
+function ProductSection({ productVersion }) {
   return (
     <Layer as="section" withBackground id="product" className="wfm-band wfm-product" aria-labelledby="product-title">
       <Grid fullWidth>
@@ -163,11 +218,11 @@ function ProductSection() {
             </p>
             <div className="wfm-product__links">
               <Button
-                href={`https://github.com/KmerHosting/wfilemanager/releases/tag/v${PRODUCT_VERSION}`}
+                href={`https://github.com/KmerHosting/wfilemanager/releases/tag/v${productVersion}`}
                 kind="ghost"
                 renderIcon={Launch}
               >
-                Release {PRODUCT_VERSION}
+                Release {productVersion}
               </Button>
             </div>
           </div>
@@ -267,6 +322,7 @@ function FinalCta() {
 
 export default function App() {
   const [theme, setTheme] = useState(getInitialTheme);
+  const productVersion = useProductVersion();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-carbon-theme", theme);
@@ -280,10 +336,10 @@ export default function App() {
       <SkipToContent href="#main-content" />
       <SiteHeader theme={theme} onToggleTheme={toggleTheme} />
       <Content id="main-content" className="wfm-site-content">
-        <Hero />
+        <Hero productVersion={productVersion} />
         <ProductFacts />
         <Capabilities />
-        <ProductSection />
+        <ProductSection productVersion={productVersion} />
         <InstallSection />
         <Architecture />
         <Faq />

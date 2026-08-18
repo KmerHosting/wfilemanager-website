@@ -17,6 +17,7 @@ const sources = Object.fromEntries(await Promise.all(srcFiles.map(async (file) =
 const joinedSource = Object.values(sources).join("\n");
 const styles = sources["src/styles.scss"] || "";
 const app = sources["src/App.jsx"] || "";
+const content = sources["src/content.js"] || "";
 const pkg = JSON.parse(await readFile("package.json", "utf8"));
 const violations = [];
 
@@ -98,6 +99,26 @@ for (const requiredThemeBehavior of [
   if (!app.includes(requiredThemeBehavior)) {
     violations.push(`Carbon theme behavior is missing: ${requiredThemeBehavior}`);
   }
+}
+
+for (const requiredReleaseBehavior of [
+  'https://api.github.com/repos/KmerHosting/wfilemanager/releases/latest',
+  'function useProductVersion()',
+  'release?.tag_name',
+  'cache: "no-store"',
+  '<Hero productVersion={productVersion} />',
+  '<ProductSection productVersion={productVersion} />',
+]) {
+  if (!app.includes(requiredReleaseBehavior)) {
+    violations.push(`Live release synchronization is missing: ${requiredReleaseBehavior}`);
+  }
+}
+
+const fallbackVersion = content.match(/PRODUCT_VERSION\s*=\s*"([^"]+)"/)?.[1] || null;
+if (!fallbackVersion) {
+  violations.push("Missing bundled PRODUCT_VERSION fallback.");
+} else if (fallbackVersion !== pkg.version) {
+  violations.push(`Website package version (${pkg.version}) must match PRODUCT_VERSION fallback (${fallbackVersion}).`);
 }
 
 const rawColorPattern = /#[0-9a-fA-F]{3,8}\b|\brgba?\(|\bhsla?\(/;

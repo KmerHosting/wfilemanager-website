@@ -1,4 +1,4 @@
-export const PRODUCT_VERSION = "0.11.7";
+export const PRODUCT_VERSION = "0.11.8";
 
 export const INSTALL_COMMAND =
   "curl -fsSL https://igihzeyfgwhnuiflamvn.supabase.co/storage/v1/object/public/releases.kmerhosting.com/wfilemanager/install.sh | sudo bash";

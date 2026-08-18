@@ -81,9 +81,9 @@ function Hero() {
         </Column>
         <Column sm={4} md={8} lg={10} xlg={10}>
           <ProductShot
-            src={EXPLORER_SCREENSHOT}
-            alt="wFileManager File Explorer showing Linux directories and file controls"
-            caption="File Explorer — the real Linux filesystem, managed from the browser."
+            src={UPDATES_SCREENSHOT}
+            alt="wFileManager About and updates screen showing release status"
+            caption="Updates remain visible, verified and recoverable."
             eager
           />
         </Column>
@@ -148,9 +148,9 @@ function ProductSection() {
       <Grid fullWidth>
         <Column sm={4} md={8} lg={10}>
           <ProductShot
-            src={UPDATES_SCREENSHOT}
-            alt="wFileManager About and updates screen showing release status"
-            caption="Updates remain visible, verified and recoverable."
+            src={EXPLORER_SCREENSHOT}
+            alt="wFileManager File Explorer showing Linux directories and file controls"
+            caption="File Explorer — the real Linux filesystem, managed from the browser."
           />
         </Column>
         <Column sm={4} md={8} lg={6}>

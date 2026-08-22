@@ -4,9 +4,9 @@ export const INSTALL_COMMAND =
   "curl -fsSL https://igihzeyfgwhnuiflamvn.supabase.co/storage/v1/object/public/releases.kmerhosting.com/wfilemanager/install.sh | sudo bash";
 
 export const PRODUCT_FACTS = [
-  { value: "1", label: "local administrator" },
-  { value: "SQLite", label: "application data" },
-  { value: "systemd", label: "service runtime" },
+  { value: "Linux", label: "self-hosted" },
+  { value: "Browser", label: "web interface" },
+  { value: "Direct", label: "filesystem access" },
   { value: "MIT", label: "open-source license" },
 ];
 
@@ -52,7 +52,7 @@ export const CAPABILITIES = [
 export const ARCHITECTURE = [
   ["Files", "Direct Linux filesystem access"],
   ["Application data", "Local SQLite"],
-  ["Administrator", "One local account"],
+  ["Administrator", "Local account"],
   ["Runtime", "Prebuilt Linux x64 release"],
   ["Service", "systemd"],
   ["Updates", "Atomic replacement with rollback"],

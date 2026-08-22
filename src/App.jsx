@@ -114,7 +114,7 @@ function Hero({ productVersion }) {
             <Tag type="blue" size="md">
               Version {productVersion}
             </Tag>
-            <h1 id="hero-title">Manage Linux files without moving them somewhere else.</h1>
+            <h1 id="hero-title">Your Linux files, directly in the browser.</h1>
             <p className="wfm-hero__lead">
               wFileManager works directly with the filesystem already on your server. Browse, edit, upload, move,
               recover and update from a focused local web interface.
@@ -131,7 +131,7 @@ function Hero({ productVersion }) {
                 View source
               </Button>
             </div>
-            <p className="wfm-hero__meta">Open source · Local-first · Single administrator · Ubuntu 20.04+</p>
+            <p className="wfm-hero__meta">Open source</p>
           </div>
         </Column>
         <Column sm={4} md={8} lg={10} xlg={10}>

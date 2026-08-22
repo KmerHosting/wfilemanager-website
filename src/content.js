@@ -1,12 +1,12 @@
-export const PRODUCT_VERSION = "0.11.8";
+export const PRODUCT_VERSION = "0.11.9";
 
 export const INSTALL_COMMAND =
   "curl -fsSL https://igihzeyfgwhnuiflamvn.supabase.co/storage/v1/object/public/releases.kmerhosting.com/wfilemanager/install.sh | sudo bash";
 
 export const PRODUCT_FACTS = [
-  { value: "Linux", label: "self-hosted" },
-  { value: "Browser", label: "web interface" },
-  { value: "Direct", label: "filesystem access" },
+  { value: "Self-hosted", label: "runs on your server" },
+  { value: "Browser", label: "file management" },
+  { value: "Direct", label: "Linux filesystem" },
   { value: "MIT", label: "open-source license" },
 ];
 

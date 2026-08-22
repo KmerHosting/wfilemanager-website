@@ -114,7 +114,7 @@ function Hero({ productVersion }) {
             <Tag type="blue" size="md">
               Version {productVersion}
             </Tag>
-            <h1 id="hero-title">Your Linux files, directly in the browser.</h1>
+            <h1 id="hero-title">Manage your Linux files from the browser.</h1>
             <p className="wfm-hero__lead">
               wFileManager works directly with the filesystem already on your server. Browse, edit, upload, move,
               recover and update from a focused local web interface.

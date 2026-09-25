@@ -1,6 +1,6 @@
-import { Button, CodeSnippet, Column, Grid, Tag } from "@carbon/react";
+import { Button, CodeSnippet, Column, Grid } from "@carbon/react";
 import { Launch } from "@carbon/icons-react";
-import { INSTALL_COMMAND, INSTALL_STEPS, PRODUCT_VERSION } from "../content.js";
+import { INSTALL_COMMAND, INSTALL_STEPS } from "../content.js";
 
 export function InstallSection() {
   return (
@@ -8,9 +8,6 @@ export function InstallSection() {
       <Grid fullWidth>
         <Column sm={4} md={8} lg={6} xlg={5}>
           <div className="wfm-section-intro wfm-section-intro--inverse">
-            <Tag type="green" size="md">
-              Current release {PRODUCT_VERSION}
-            </Tag>
             <h2 id="install-title">Install the prebuilt runtime in one command.</h2>
             <p>
               The installer checks the host, downloads the published runtime, configures systemd and waits for a
@@ -36,7 +33,7 @@ export function InstallSection() {
             ))}
           </div>
           <div className="wfm-install__actions">
-            <Button href="https://kmerhosting.com/docs" kind="tertiary" renderIcon={Launch}>
+            <Button href="https://kmerhosting.com/docs/products/wfilemanager" kind="tertiary" renderIcon={Launch}>
               Installation documentation
             </Button>
           </div>

@@ -176,7 +176,7 @@ function Capabilities() {
               The interface stays close to Linux filesystem concepts instead of turning the server into a separate
               storage product.
             </p>
-            <Link href="https://kmerhosting.com/docs">Read the documentation</Link>
+            <Link href="https://kmerhosting.com/docs/products/wfilemanager">Read the documentation</Link>
           </div>
         </Column>
         <Column sm={4} md={8} lg={{ span: 10, offset: 6 }}>
@@ -310,7 +310,7 @@ function FinalCta() {
         <Column sm={4} md={8} lg={{ span: 6, offset: 10 }}>
           <div className="wfm-actions wfm-actions--end">
             <Button href="#install">Install now</Button>
-            <Button href="https://kmerhosting.com/docs" kind="tertiary" renderIcon={Launch}>
+            <Button href="https://kmerhosting.com/docs/products/wfilemanager" kind="tertiary" renderIcon={Launch}>
               Documentation
             </Button>
           </div>

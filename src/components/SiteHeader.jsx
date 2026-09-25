@@ -48,7 +48,7 @@ export function SiteHeader({ theme, onToggleTheme }) {
                   {label}
                 </HeaderMenuItem>
               ))}
-              <HeaderMenuItem href="https://kmerhosting.com/docs">Docs</HeaderMenuItem>
+              <HeaderMenuItem href="https://kmerhosting.com/docs/products/wfilemanager">Docs</HeaderMenuItem>
               <HeaderMenuItem href="https://github.com/KmerHosting/wfilemanager">GitHub</HeaderMenuItem>
             </HeaderNavigation>
             <HeaderGlobalBar>
@@ -75,7 +75,7 @@ export function SiteHeader({ theme, onToggleTheme }) {
                   {label}
                 </SideNavLink>
               ))}
-              <SideNavLink href="https://kmerhosting.com/docs">Documentation</SideNavLink>
+              <SideNavLink href="https://kmerhosting.com/docs/products/wfilemanager">Documentation</SideNavLink>
               <SideNavLink href="https://github.com/KmerHosting/wfilemanager">GitHub</SideNavLink>
             </SideNavItems>
           </SideNav>

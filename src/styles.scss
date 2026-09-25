@@ -347,27 +347,49 @@ code {
 }
 
 .wfm-footer {
-  padding-block: spacing.$spacing-09;
+  padding-block: spacing.$spacing-09 spacing.$spacing-06;
   border-block-start: 1px solid var(--cds-border-subtle-01);
   background: var(--cds-background);
 }
 
-.wfm-footer h2 {
+.wfm-footer__brand h2 {
   @include type.type-style("heading-03");
   margin: 0;
 }
 
-.wfm-footer p {
+.wfm-footer__brand p,
+.wfm-footer__bottom p {
   @include type.type-style("body-compact-01");
-  margin: spacing.$spacing-04 0 0;
   color: var(--cds-text-secondary);
 }
 
-.wfm-footer__links {
+.wfm-footer__brand p {
+  max-inline-size: 28rem;
+  margin: spacing.$spacing-04 0 0;
+}
+
+.wfm-footer__group {
   display: flex;
-  flex-wrap: wrap;
-  gap: spacing.$spacing-06;
-  margin-block-end: spacing.$spacing-06;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: spacing.$spacing-04;
+}
+
+.wfm-footer__group strong {
+  @include type.type-style("label-01");
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.wfm-footer__bottom {
+  margin-block-start: spacing.$spacing-09;
+  padding-block-start: spacing.$spacing-05;
+  border-block-start: 1px solid var(--cds-border-subtle-01);
+}
+
+.wfm-footer__bottom p {
+  margin: 0;
 }
 
 @include breakpoint.breakpoint-down(lg) {

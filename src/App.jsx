@@ -131,7 +131,6 @@ function Hero({ productVersion }) {
                 View source
               </Button>
             </div>
-            <p className="wfm-hero__meta">Open source</p>
           </div>
         </Column>
         <Column sm={4} md={8} lg={10} xlg={10}>

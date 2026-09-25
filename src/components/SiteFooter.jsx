@@ -12,7 +12,7 @@ export function SiteFooter() {
           <nav className="wfm-footer__links" aria-label="Footer navigation">
             <Link href="https://github.com/KmerHosting/wfilemanager">GitHub</Link>
             <Link href="https://github.com/KmerHosting/wfilemanager/releases">Releases</Link>
-            <Link href="https://kmerhosting.com/docs">Documentation</Link>
+            <Link href="https://kmerhosting.com/docs/products/wfilemanager">Documentation</Link>
             <Link href="https://kmerhosting.com">KmerHosting</Link>
           </nav>
           <p>© {new Date().getFullYear()} KmerHosting LLC.</p>

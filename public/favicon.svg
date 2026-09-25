@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#161616"/>
-  <path d="M4 7h9l2.5 3H28v15H4z" fill="none" stroke="#f4f4f4" stroke-width="2"/>
-  <path d="M8 15h16M8 20h11" fill="none" stroke="#0f62fe" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="wFileManager">
+  <rect width="32" height="32" rx="6" fill="#0f62fe"/>
+  <path d="M9 6h9l5 5v15H9V6z" fill="#ffffff"/>
+  <path d="M18 6v6h6" fill="#d0e2ff"/>
+  <path d="M12 17h8M12 21h8" fill="none" stroke="#0f62fe" stroke-width="1.8" stroke-linecap="round"/>
 </svg>
